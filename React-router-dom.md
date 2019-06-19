@@ -33,3 +33,32 @@ export default PrivateRoute;
    </App>
  </BrowserRoute>
  ```
+## 登录注册前后端信息交互例
+>登录信息确认
+```
+fetch(url, {
+   method: 'post',
+   body: Json.stringify(data),
+   }).then(res => res.json())
+   .then(json => {
+      if(json !== null){
+        console.log(json);
+        let userInfo ={ userName:json.userName,passWord:json.passWord};
+        this.props.login(userLogin);  //改变响应式状态显示——>位于header
+      }else{
+        this.setState({hasUser: '用户名或密码错误'})
+      }
+  });
+```
+>注册信息确认
+```
+fetch(url)
+   .then(res => res.json())
+   .then(json =>{
+      if(json)
+      {alert('注册成功')}
+   })
+```
+## 登录登出状态自响应显示
+
+        
