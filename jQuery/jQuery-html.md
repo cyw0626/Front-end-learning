@@ -14,8 +14,8 @@ $(selector).attr()
 对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法。  
 具有true和false两个属性的属性，如checked,selected或者disabled使用prop()。
 ## 2.jQuery设置内容和属性  
->$(selector).text("you want to change")  //回调使用origText
->$(selector).html("you want to change")  //回调使用origText
+>$(selector).text("you want to change")  //回调使用origText  
+>$(selector).html("you want to change")  //回调使用origText  
 >$(selector).val("you want to change")  //回调使用origValue
 回调必需index:
 ```
