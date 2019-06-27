@@ -16,3 +16,9 @@ $(selector).fadeOut(speed,callback);  //淡出可见元素
 $(selector).fadeToggle(speed,callback);   //fadeIn()与fadeOut()方法的切换
 $(selector).fadeTo(speed,opacity,callback);   //渐变为给定的不透明度
 ```
+## 3.jQuery滑动
+```
+$(selector).slideDown(speed,callback);    //向下滑动元素
+$(selector).slideUp(speed,callback);    //向上滑动元素
+$(selector).slideToggle(speed,callback);    //向上向下切换元素
+```
