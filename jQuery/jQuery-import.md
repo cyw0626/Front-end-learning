@@ -54,9 +54,9 @@ jQuery是一个JavaScript函数库。
 );
 ```
 ⑧focus() ——当元素获得焦点，触发事件；  
- blur() ——当元素失去焦点，触发事件； 
+  blur() ——当元素失去焦点，触发事件； 
  ```
-   $("input").focus(function(){
+  $("input").focus(function(){
     $(this).css("background-color","#cccccc");
   });
   $("input").blur(function(){
