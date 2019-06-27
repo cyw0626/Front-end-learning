@@ -59,4 +59,13 @@ $("button").click(function(){
   div.animate({fontSize:'3em'},"slow");
 });
 ```
-
+## 5.jQuery停止动画
+stop()方法适用于所有jQuery效果函数，包括滑动、淡入淡出和自定义动画。
+>被立即停止的动画不会触发回调，被立即完成的动画会触发回调。  
+```
+$(selector).stop(stopAll,goToEnd);
+```
+可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。  
+可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false，即非立刻完成当前动画。\
+## 6.jQuery链
+在相同元素上运行多条jQuery命令，一条接一条。
