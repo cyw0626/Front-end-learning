@@ -51,7 +51,7 @@ $("button").click(function(){
 });
 ```
 ### jQuery animate()——使用队列功能
-<div>元素右移，并且字号增加。
+div元素右移，并且字号增加。  
 ```
 $("button").click(function(){
   var div=$("div");
@@ -59,3 +59,4 @@ $("button").click(function(){
   div.animate({fontSize:'3em'},"slow");
 });
 ```
+
