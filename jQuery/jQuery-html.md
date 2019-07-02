@@ -54,3 +54,31 @@ function appendText(){
    $("body").append(txt);
 }
 <button onclick="appendText()">追加文本</button>
+```
+## 4.jQuery删除元素
+jQuery remove()方法删除被选元素及其子元素。  
+jQuery empty()方法删除被选元素的子元素。
+```
+$("#div1").remove();
+$("#div1").empty();
+$("p").remove(".italic");   //过滤同级被删除元素
+```
+## 5.jQuery获取并设置CSS类
+addClass()向被选元素添加一个或多个类。  
+removeClass()从被选元素删除一个或多个类。  
+toggleClass()对被选元素进行添加/删除类的切换操作。
+css("propertyname")方法返回指定的CSS属性。  
+css("propertyname","value")设置指定CSS属性。
+```
+$("div").addClass("blue);
+$("div").removeClass("blue");
+$("div").toggleClass("blue");
+$("p").css("background-color);
+"("p").css({"background-color":"yellow","font-size":"200%"});
+```
+width()方法设置或返回元素的宽度（不包括内边距、边框或外边距）。  
+height()方法设置或返回元素的高度（不包括内边距、边框或外边距）。  
+innerWidth() 方法返回元素的宽度（包括内边距）。  
+innerHeight() 方法返回元素的高度（包括内边距）。  
+outerWidth() 方法返回元素的宽度（包括内边距和边框）。  
+outerHeight() 方法返回元素的高度（包括内边距和边框）。
