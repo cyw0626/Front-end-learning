@@ -16,8 +16,9 @@ $(selector).attr()
 ## 2.jQuery设置内容和属性  
 >$(selector).text("you want to change")  //回调使用origText  
 >$(selector).html("you want to change")  //回调使用origText  
->$(selector).val("you want to change")  //回调使用origValue
-回调必需index:
+>$(selector).val("you want to change")  //回调使用origValue  
+
+回调必需index，function里的i是必需的:
 ```
 $("#test2").html(function(i,origText){
    return "旧 html: " + origText + " 新 html: Hello <b>world!</b> (index: " + i + ")"; 
@@ -37,3 +38,19 @@ $(document).ready(function(){
   });
 });
 ```
+## 3.jQuery添加元素
+jQuery append()方法在被选元素的结尾插入内容（元素内部）。  
+jQuery prepend()方法在被选元素的开头插入内容（元素内部）。  
+jQuery after()方法在被选元素之后插入内容。  
+jQuery before()方法在被选元素之前插入内容。
+```
+$("p").append("追加文本");
+$("p").prepend("在开头追加文本");
+$("img").after("在被选后面添加文本");
+$("img").before("在被选前面添加文本");
+
+function appendText(){
+   var txt="<p>文本</p>";
+   $("body").append(txt);
+}
+<button onclick="appendText()">追加文本</button>
