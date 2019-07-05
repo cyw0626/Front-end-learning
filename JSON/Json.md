@@ -40,3 +40,28 @@ Json值可以是：
 ### Json文件
 - Json文件的文件类型是.json
 - Json文本的MIME类型是"application/json"
+## Json对象
+### 访问对象值
+```
+var myObj,x;
+myObj={"name":"GitHub","site":null};
+x=myObj.name;
+*************
+x=myObj["name"];
+```
+### 循环对象
+**只能使用([])形式
+```
+for (x in myObj){
+  document.getElementById("demo").innerHTML += x +"<br>";
+}
+```
+### 修改值  
+使用(.)或者([])修改Json对象的值
+```
+myObj.sites.site1="www.google.com"
+**********************************
+myObj.sites["site1"]="www.google.com"
+```
+### 删除对象属性
+使用delete删除Json对象属性
