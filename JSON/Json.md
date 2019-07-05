@@ -77,7 +77,14 @@ for (i = 0; i < myObj.sites.length; i++){
 }
 ```
 ### 删除数组
-delete运算符并不是彻底删除元素，而是删除它的值，但仍会保留空间
+delete运算符并不是彻底删除元素，而是删除它的值，但仍会保留空间。
 ```
 delete myObj.sites[1];
 ```
+## JSON.parse()
+在接收服务器数据时一般是字符串，使用JSON.parse()将数据转换为JavaScript对象。
+### 语法
+```
+JSON.parse(text[,reviver])  //text必需的JSON字符串，reviver可选的转换结果函数
+```
+### 异常-
