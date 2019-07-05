@@ -66,7 +66,7 @@ myObj.sites["site1"]="www.google.com"
 ### 删除对象属性
 使用delete删除Json对象属性
 ## Json数组
-循环数组
+### 循环数组
 ```
 for (i in myObj.sites){
   x += myObj.sites[i] + "<br>" ;
@@ -75,3 +75,9 @@ for (i in myObj.sites){
 for (i = 0; i < myObj.sites.length; i++){
   x += myObj.sites[i] + "<br>";
 }
+```
+### 删除数组
+delete运算符并不是彻底删除元素，而是删除它的值，但仍会保留空间
+```
+delete myObj.sites[1];
+```
