@@ -8,7 +8,9 @@ jq(document).ready(function(){
     jq("p").text("jQuery 仍然在工作!");
   });
 });
+```
 =========================================================
+```
 $.noConflict();
 jQuery(document).ready(function($){
   $("button").click(function(){
