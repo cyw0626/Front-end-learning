@@ -65,3 +65,13 @@ myObj.sites["site1"]="www.google.com"
 ```
 ### 删除对象属性
 使用delete删除Json对象属性
+## Json数组
+循环数组
+```
+for (i in myObj.sites){
+  x += myObj.sites[i] + "<br>" ;
+}
+********************************
+for (i = 0; i < myObj.sites.length; i++){
+  x += myObj.sites[i] + "<br>";
+}
