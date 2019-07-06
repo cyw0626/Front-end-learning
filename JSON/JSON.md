@@ -98,7 +98,24 @@ obj.initDate = new Daate(obj.initDate);
 JSON不允许包含函数，需要将函数作为字符串存储，再将字符串转化为函数。
 >eval()还要用一对圆括号包起来，迫使eval函数在处理JS代码时将括号内的表达式转化为对象，而不是语句。
 ```
-var text = '{"name":"GitHub","fc":"function(){return 1000;}"}';
+var text = '{"name":"GitHub","fc":function(){return 1000;}}';
 var obj = JSON.parse(text);
 obj.fc=eval("("+obj.fc+")");  // eval(string)函数可计算某个字符串，并执行其中的JS代码。
+```
+## JSON.stringify()
+在向服务器发送数据时一般是字符串，使用JSON.stringify()方法将JS对象转换为字符串。
+### 语法
+```
+JSON.stringify(value[,replacer[,space]])
+```
+- value必需转换的JS对象或数组
+- replacer可选的用于转换结果的函数或数组
+- space 可选的文本添加缩进、空格和换行。
+### JavaScript对象、数组转换
+### 解析函数
+JSON不允许包含函数，JSON.stringify()会删除JavaScript对象的函数，包括key和value。
+```
+var text ='{"name":"GitHub","fc":function(){return 1000;}}';
+obj.fc=text.fc.toString();
+var myJSON=JSON.stringify(obj);
 ```
