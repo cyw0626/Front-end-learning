@@ -39,3 +39,43 @@ li strong{
 ======================
 <li><strong>位于li元素内的strong是斜体字。</strong></li>
 ```
+### id选择器
+**id 选择器为标有特定id的HTML元素指定特定的样式，以"#"来定义。**
+### 类选择器
+**在CSS中，类选择器以一个点号显示。**
+### 属性选择器
+```
+[attribute]   //用于选取带有指定属性的元素
+{
+  ...;
+}
+============
+[attribute=value]   //用于选取带有指定属性和值的元素
+{
+  ...;
+}
+==================
+[attribute~=value]  //用于选取属性值中包含指定词汇的元素
+{
+  ...;
+}
+```
+## 插入CSS样式表
+### 外部样式表
+```
+<head>
+  <link rel="stylesheet" type="text/css" href="mystyle.css" />
+</head>
+```
+### 内部样式表
+```
+<head>
+  <style type="text/css">
+    hr {color: sienna;}
+  </style>
+</head>
+```
+### 内联样式
+```
+<p style="color: red;">红色段落</p>
+```
