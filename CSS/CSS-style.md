@@ -1,5 +1,7 @@
 # CSS-two学习
 ## CSS背景
+- 背景属性
+将所有背景属性写在一个background声明中。
 - 背景色
 使用background-color属性为元素设置背景色。
 - 背景图像
@@ -21,3 +23,4 @@ background-repeat:repeat-y;  //垂直方向
 可以使用关键字center,top,...;或者百分数值;或者长度值(相对于左上角)。
 - 背景关联
 使用background-image防止文档滑动时，背景图像的滚动。
+## 
