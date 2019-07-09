@@ -81,3 +81,13 @@ text-align设置水平对齐方式；vertical-align设置垂直对齐方式。
 - 表格内边距
 padding属性控制内容与边框的距离。
 - 表格颜色
+## CSS轮廓
+- outline在一个声明中设置所有的轮廓属性
+- outline-color设置轮廓颜色
+- outline-style设置轮廓样式
+- outline-width设置轮廓宽度
+```
+p{
+  outline: red dotted thick;
+}
+```
