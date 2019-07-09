@@ -41,3 +41,16 @@ underline会对元素加下划线；overline在顶端增加上划线，line-thro
 - 处理空白符  
 使用white-space属性会影响到用户代理对源文档中的空格、换行和tab字符的处理。  
 normal会丢掉多余的空白符，pre保留所有空白，nowrap防止元素换行，pre-wrap保留所有，pre-line合并所有空白符，保留换行符。
+## CSS字体
+- 指定字体    
+使用font-family属性定义文本的字体。
+>当字体名中有一个或多个空格，或者字体名包括#和$之类的符号，需要在声明中加单引号。
+- 字体风格  
+font-style属性规定斜体文本。normal文本正常显示，italic文本斜体显示，oblique文本倾斜显示。
+- 字体变形  
+font-variant属性设定小型大写字母。
+- 字体加粗
+font-weight设置文本的粗细。100~900指定了9级加粗度，400~normal，700~bold。
+- 字体大小  
+font-size属性设置文本的大小。
+>使用em或百分比来设置字体大小在浏览器中调整文本。
