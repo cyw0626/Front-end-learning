@@ -4,6 +4,7 @@
 内边距呈现了元素的背景，内边距的边缘是边框。  
 边框以外是外边距，外边距默认透明。  
 - padding：内边距
+- border：边框
 - margin：外边距
 ## CSS内边距
 CSS padding属性定义元素边框与元素内容之间的空白区域。
@@ -12,3 +13,10 @@ CSS padding属性定义元素边框与元素内容之间的空白区域。
 - padding-bottom  //下内边距
 - padding-left  //左内边距
 >属性值为百分数值时，相对于父元素来计算。
+## CSS边框
+CSS border属性允许规定元素边框的样式、宽度和颜色。
+- border-style属性定义边框的样式
+- border-width属性为边框指定宽度，有thin,medium,thick属性
+**希望边框出现的话，必需声明一个边框格式**
+- border-color设置边框颜色  
+引入transparent创建有宽度不可见边框。
