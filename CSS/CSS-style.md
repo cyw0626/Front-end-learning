@@ -38,6 +38,6 @@ letter-spacing属性可以改变字符之间的间隔。
 - 文本装饰  
 使用text-decoration属性。  
 underline会对元素加下划线；overline在顶端增加上划线，line-through在文本中间画一个贯穿线，blink会让文本闪烁。
-- 处理空白符
-使用white-space属性会影响到用户代理对源文档中的空格、换行和tab字符的处理。
+- 处理空白符  
+使用white-space属性会影响到用户代理对源文档中的空格、换行和tab字符的处理。  
 normal会丢掉多余的空白符，pre保留所有空白，nowrap防止元素换行，pre-wrap保留所有，pre-line合并所有空白符，保留换行符。
