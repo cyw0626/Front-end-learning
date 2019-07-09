@@ -54,3 +54,30 @@ font-weight设置文本的粗细。100~900指定了9级加粗度，400~normal，
 - 字体大小  
 font-size属性设置文本的大小。
 >使用em或百分比来设置字体大小在浏览器中调整文本。
+## CSS链接
+- a:link {color:red;} //未被访问的链接
+- a:visited{color:green;} //已被访问的链接
+- a:hover{color:blue;}  //鼠标指针移动到链接上
+- a:active{color:yellow;}  //正在被点击的链接
+## CSS列表
+list-style可以包含列表标志类型、标志图像、标志位置。
+- list-style-type用于列表标志类型，可以为square、circle。
+- list-style-image将标志展示为图像，可以为url(...)。
+- list-style-position出现在列表项内容之外还是内部，参数为inside或者outside。
+## CSS表格
+- 表格边框  
+使用border属性设置表格边框。
+- 折叠边框  
+border-collapse属性将表格边框折叠为单一边框。
+```
+table{
+  border-collapse:collapse;
+}
+```
+- 表格宽度和高度  
+通过width和height定义表格宽度和高度。
+- 表格文本对齐
+text-align设置水平对齐方式；vertical-align设置垂直对齐方式。
+- 表格内边距
+padding属性控制内容与边框的距离。
+- 表格颜色
