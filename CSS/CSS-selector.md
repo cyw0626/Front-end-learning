@@ -63,3 +63,34 @@ h1 > strong {color:red;}
 h1 + p {margin-top:50px;}   
 //选择紧接在h1元素后出现的段落，h1和p元素拥有共同的父元素。
 ```
+## CSS伪类
+CSS伪类用于向某些选择器添加特殊的效果。
+属性|描述
+:---:|:---:
+:link|向未被访问的链接添加样式
+:active|向被激活的元素添加样式
+:hover|当鼠标悬浮在元素上方时，向元素添加样式
+:visited|向已被访问的链接添加样式
+:focus|向拥有键盘输入焦点的元素添加样式
+:first-child|向元素的第一个子元素添加样式
+:lang|向带有指定lang属性的元素添加样式
+>> 在CSS定义中，a:hover必需被置于a:link和a:visited之后，a:active必需被置于a:hover之后
+```
+<html>
+<head>
+
+<style type="text/css">
+q:lang(no)
+   {
+   quotes: "~" "~"
+   }
+</style>
+
+</head>
+
+<body>
+<p>文字<q lang="no">段落中的引用的文字</q>文字</p>
+</body></html>
+
+//文字~段落中的引用的文字~文字
+```
