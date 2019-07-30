@@ -39,3 +39,27 @@
 [attribute^=value]|匹配属性值以指定值开头的每个元素
 [attribute$=value]|匹配属性值以指定值结尾的每个元素
 [attribute*=value]|匹配属性值中包含指定值的每个元素
+## CSS后代选择器
+后代选择器可以选择作为某元素后代的元素。
+```
+<h1>This is an <em> important <em> heading.</h1>
+h1 em{color:red;}
+```
+## CSS子元素选择器
+子元素选择器只能选择作为某元素子元素的元素。
+```
+<h1>This is <strong> very </strong> important.</h1>
+<h1>This is <em> really <strong> very </strong> <em> important.</h1>
+h1 > strong {color:red;}
+```
+## CSS相邻兄弟选择器
+相邻兄弟选择器可选择紧接在另一元素后的元素，且二者有相同父元素。
+```
+<body>
+  <h1>h1</h1>
+  <p>p1</p>
+  <p>p2</p>
+</body>
+h1 + p {margin-top:50px;}   
+//选择紧接在h1元素后出现的段落，h1和p元素拥有共同的父元素。
+```
