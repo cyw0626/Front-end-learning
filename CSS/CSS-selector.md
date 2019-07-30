@@ -74,7 +74,7 @@ CSS伪类用于向某些选择器添加特殊的效果。
 :focus|向拥有键盘输入焦点的元素添加样式
 :first-child|向元素的第一个子元素添加样式
 :lang|向带有指定lang属性的元素添加样式
->> 在CSS定义中，a:hover必需被置于a:link和a:visited之后，a:active必需被置于a:hover之后
+> 在CSS定义中，a:hover必需被置于a:link和a:visited之后，a:active必需被置于a:hover之后
 ```
 <html>
 <head>
