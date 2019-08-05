@@ -50,4 +50,52 @@ rotate(angle)|定义2D旋转，在参数中规定角度
 skew(x-angle,y-angle)|定义2D倾斜旋转，沿着X和Y轴
 skewX(angle)|定义2D倾斜转换，沿着X轴
 skewY(angle)|定义2D倾斜转换，沿着Y轴
-## CSS 3D转换
+## CSS3 3D转换
+- rotateX()元素围绕其X轴以给定度数进行旋转;rotateY()元素围绕其  Y轴以给定的读书旋转。
+```
+transform:rotateX(120deg);
+transform:rotateY(120deg);
+```
+## CSS3过渡
+CSS3过渡是元素从一种样式逐渐改变为另一种的结果。  
+- 规定希望效果
+- 规定效果时长
+```
+div
+{
+transition:width 2s,height 2s,transform 2s;
+}
+div:hover
+{
+width:200px;
+height:200px:
+transform:rotate(180deg);
+}
+```
+过渡属性：  
+
+属性|描述
+:---:|:---:
+transition|简写属性，用于在一个属性中设置四个过渡属性
+transition-property|规定应用过渡的CSS属性的名称
+transition-duration|规定过渡效果花费的时间，默认为0
+transition-timing-fuction|规定过渡效果的时间曲线，默认为ease
+transition-delay|规定过渡效果何时开始，默认为0
+```
+transition:width 1s linear 2s;
+```
+## CSS3动画
+@keyframes规则用于创建动画，在@keyframes中规定某项CSS样式，就能创建由当前样式逐渐改变为新样式的效果。  
+```
+div
+{
+animation: mycartoon 5s linear 2s infinite alternate;
+}
+@keyframes mycartoon
+{
+0% {background：red;}
+50% {background：yellow;}
+100% {background：green;}
+}
+```
+## CSS3多列
