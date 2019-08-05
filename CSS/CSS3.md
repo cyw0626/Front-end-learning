@@ -99,3 +99,43 @@ animation: mycartoon 5s linear 2s infinite alternate;
 }
 ```
 ## CSS3多列
+- column-count属性规定元素应该被分隔的列数  
+- column-gap属性规定列之间的间隔
+- column-rule属性规定列之间的宽度、样式和颜色规则
+```
+div
+{
+column-count:3;
+column-gap:40px;
+column-rule:3px outset #ff0000;
+}
+```
+## CSS3
+- resize属性规定是否可由用户调整元素尺寸
+```
+div
+{
+resize:both;
+overflow:auto;
+}
+```
+- box-sizing属性允许以确切的方式定义适应某个区域的内容
+```
+div
+{
+box-sizing:border-box;
+-moz-box-sizing:border-box;	/* Firefox */
+-webkit-box-sizing:border-box;	/* Safari */
+width:50%;
+float:left;
+}
+```
+- outline-offset属性对轮廓进行偏移，并在超出边框边缘的位置绘制轮廓。
+```
+div
+{
+border:2px solid black;
+outline:2px solid red;
+outline-offset:15px;
+}
+```
