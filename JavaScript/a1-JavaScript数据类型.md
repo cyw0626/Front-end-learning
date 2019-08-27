@@ -22,7 +22,8 @@
 3.特殊数值：  
 - +0和-0  
 - NaN(Not a Number)
-- Infinity无穷
+- Infinity无穷  
+
 4.与数值相关的全局方法  
 - parseInt() ①将字符串转为整数②两个参数时将第二个参数位进制(2-36)转换为十进制
 - parseFloat() 将字符串转换为浮点数
