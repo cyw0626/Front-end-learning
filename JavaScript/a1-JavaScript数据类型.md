@@ -58,3 +58,53 @@ for(var i in obj)
   console.log('键值：',obj[i]);
 }
 ```
+## 数组
+1.数组是按次序排列的一组值。  
+2.任何类型的数据，都可以放入数组。  
+> 3.数组本质上属于一种特殊的对象。  
+
+4.①数组的length属性，返回数组的成员数量。  
+②清除数组的一个方法，就是将length属性设为0。  
+5.检查某个键名是否存在的运算符in适用于数组。空位的话in返回false。  
+6.for...in不仅会遍历数组所有的数字键，还会遍历非数字键。  
+7.数组的遍历：
+```
+var a=[1,2,3];
+//for循环
+for(var i=0;i<a.length;i++)
+{
+  console.log(a[i]);
+}
+//while循环
+var i=0;
+while(i<a.length)
+{
+  console.log(a[i]);
+  i++;
+}
+//逆向遍历
+var l=a.length;
+while(l--)
+{
+  console.log(a[l]);
+}
+//forEach方法
+a.forEach(function(i){
+  console.log(i);
+});
+```
+8.数组的空位可以读取返回undefined  
+9.delete删除一个数组成员会形成空位，不会影响length属性  
+10.undefined会被forEach、for...in、Object.keys方法遍历，空位会被跳过  
+11.类似数组的对象：函数的arguments对象，大多数DOM元素集，字符串...   
+①数组的slice方法将“类似数组的对象”变为真正的数组：
+```
+var arr=Array.prototype.slice.call(arrayLike);
+```
+②call()把数组的方法放到对象上：
+```
+function print(value,index){
+  console.log(index+':'+value);
+}
+Array.prototype.forEach.call(arrayLike,print);
+```
