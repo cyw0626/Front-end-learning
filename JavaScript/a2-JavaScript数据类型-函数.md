@@ -12,6 +12,7 @@ function print(s){
 var print=function(s){
   console.log(s);
 };
+//调用print(s)
 ```
 3.Function构造函数
 ```
@@ -31,11 +32,12 @@ var add=new Function(
 ### 函数的作用域和参数
 1.函数执行时所在的作用域，是定义时的作用域，而不是调用时所在的作用域  
 2.传值传递在函数体内修改函数值不会影响到函数外部；传址传递(数组、对象、其他函数)在函数内部修改参数，会影响到原始值。  
-3.①arguments对象包含了函数运行时所有的参数，arguments[0]是函数体内第一个参数，以此类推  
-②通过arguments对象的length属性，可以判断函数调用时带几个参数
+3.由于JavaScript允许函数有不定数目的参数，所以需要一种机制，可以在函数体内部读取所有参数。  
+①arguments对象包含了函数运行时所有的参数，arguments[0]是函数体内第一个参数，以此类推  
+②通过arguments对象的length属性，可以判断函数调用时带几个参数  
 ③arguments转为数组方法
 ```
-var args=Array.prototype.slice.call(arguments0;
+var args=Array.prototype.slice.call(arguments);
 //或
 var args=[];
 for(var i=0;i<arguments.length;i++)
