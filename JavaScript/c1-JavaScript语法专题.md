@@ -60,3 +60,68 @@ try {
 
 //  捕捉到内部错误
 ```
+## 编程风格
+### 区块
+```
+block{
+  //...
+}
+```
+### 圆括号
+- 表示函数调用时，函数名与左括号之间没有空格
+- 表示函数定义时，函数名与左括号之间没有空格
+```
+function (x){...}   //匿名函数定义要有空格
+```
+### 行尾分号
+#### 不使用分号
+- for和while循环
+```
+do{
+  //...
+}while(...);    //分号不能省略
+```
+- 分支语句if、switch、try
+- 函数的声明
+```
+var f = function f(){
+};
+```
+#### 分号自动添加
+continue,break,return,throw直接跟换行符，会自动添加分号  
+### 全局变量尽量大写
+### 对象结构代替switch...case结构
+```
+function doAction(action) {
+  switch (action) {
+    case 'hack':
+      return 'hack';
+    case 'slash':
+      return 'slash';
+    case 'run':
+      return 'run';
+    default:
+      throw new Error('Invalid action.');
+  }
+}
+==========================================
+function doAction(action) {
+  var actions = {
+    'hack': function () {
+      return 'hack';
+    },
+    'slash': function () {
+      return 'slash';
+    },
+    'run': function () {
+      return 'run';
+    }
+  };
+
+  if (typeof actions[action] !== 'function') {
+    throw new Error('Invalid action.');
+  }
+
+  return actions[action]();
+}
+```
