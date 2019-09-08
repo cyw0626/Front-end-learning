@@ -125,3 +125,38 @@ function doAction(action) {
   return actions[action]();
 }
 ```
+## console对象与控制台
+1.开发者工具  
+- Elements:查看网页的HTML源码和CSS代码
+- Network:查看网页的HTTP通信情况
+- Sources:查看网页加载的脚本源码
+- Performance:查看网页的性能情况，比如CPU和内存消耗
+- Console:用来运行JavaScript命令
+2.console.log方法支持占位符：
+- %s字符串
+- %d整数
+- %i整数
+- %f浮点数
+- %o对象的链接
+- %cCSS格式字符串
+3.console.table()方法将复合类型的数据转为表格显示  
+4.console.count()方法用于计数，输出它被调用多少次  
+5.console.dir()输出DOM对象的所有属性  
+```
+console.dirxml(document.body)
+```
+6.console.dirxml()方法用目录树的形式，显示DON节点  
+7.console.assert()方法用于程序运行过程中，进行条件判断，如果不满足条件则显示已给西欧五，程序继续执行  
+8.console.time()方法计时开始，console.timeEnd()表示计时结束，它们的参数是计时器的名称  
+9.console.group()和console.groupEnd()方法用于显示信息分组，console.groupCollapsed()在第一次显示时是收起的  
+10.console.trace()方法显示当前执行的代码在堆栈中的调用路径  
+11.控制台命令API  
+- $_属性返回上一个表达式的值
+- $0-$4控制台保存的最近5个在Elements面板中的DOM元素  
+- $(selector)返回第一个匹配的元素
+- $$(selector)返回选中的DOM对象  
+- $x(path)返回一个数组，包含匹配特定XPath表达式的所有DOM元素
+- inspect(object)方法打开相关面板，并选中相应的元素，显示它的细节
+- getEventListeners(object)方法返回一个对象，该对象的成员为object登记了回调函数的各种事件（比如click或keydown），每个事件对应一个数组，数组的成员为该事件的回调函数
+- keys(object)方法返回一个数组，包含object的所有键名/values(object)方法返回一个数组，包含object的所有键值
+- monitorEvents(object[, events])方法监听特定对象上发生的特定事件。unmonitorEvents方法用于停止监听。
