@@ -41,6 +41,7 @@ if (new Boolean(false).valueOf()){
 - Number.MIN_VALUE：表示最小的正数（即最接近0的正数，在64位浮点数体系中为5e-324），相应的，最接近0的负数为-Number.MIN_VALUE  
 - Number.MAX_SAFE_INTEGER：表示能够精确表示的最大整数，即9007199254740991  
 - Number.MIN_SAFE_INTEGER：表示能够精确表示的最小整数，即-9007199254740991    
+
 2.实例方法
 - Number.prototype.toSting()将一个数值转为字符串  
 > toSting()方法接受一个参数，表示输出的进制
