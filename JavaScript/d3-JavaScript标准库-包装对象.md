@@ -22,3 +22,14 @@ Boolean(123)  //true
 'abc'.length  //3
 ```
 调用结束后，这个临时对象就会被销毁。且自动转换生成的包装对象是只读的，无法修改，无法添加新属性。  
+## Boolean()对象
+1.所有对象的布尔值都是true
+```
+if (new Boolean(false)){
+  console.log('true');
+}   //true
+if (new Boolean(false).valueOf()){
+  console.log('true');
+}   //无输出
+```
+## 
