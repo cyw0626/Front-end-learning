@@ -155,3 +155,31 @@ new RegExp('').test('abc')  //true
 ⑨组匹配  
 正则表达式的括号表示分组匹配，括号中的模式可以用来匹配分组的内容   
 ## JSON对象
+1.JSON格式(JavaScript Object Notation)是一种用于数据交换的文本格式  
+2.JSON对值的类型和格式有严格的规定  
+- 符合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象  
+- 原始类型的值只有四种：字符串、数值（十进制表示）、布尔值和null  
+- 字符串必须使用双引号表示，不能使用单引号  
+- 对象的键名必须放在双引号里面  
+- 数组或对象最后一个成员的后面，不能加逗号  
+3.JSON.stringify()静态方法
+- 基本方法：用于将一个值转为JSON字符串  
+> 如果对象属性是undefined、函数或XML对象，该属性会被JSON.stringify过滤  
+> 如果数组的成员是undefined、函数或XML对象，则这些值被转成null  
+- JSON.stringify可以接受一个数组/函数作为第二个参数，指定需要转成字符串的属性  
+- JSON.stringify可以接受第三个参数，如果是数字可在每个属性前加空格/如果是字符串，则字符串会添加在每行前面  
+- 参数对象有自定义的toJSON方法，JSON.stringify会使用这个方法的返回值作为参数，忽略对象的其他属性  
+```
+//Date对象有自身的toJSON方法
+var date=new Date();
+date.toJSON()
+JSON.toStringify(date)
+```
+```
+// 设置 toJSON 方法时
+RegExp.prototype.toJSON = RegExp.prototype.toString;
+JSON.stringify(/foo/) // ""/foo/""
+```
+4.JSON.parse()
+- 将JSON字符串转换成对应的值  
+- 接受函数作为第二个参数
