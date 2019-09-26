@@ -27,3 +27,54 @@ v.price //200
 ```
 ### Object.create()创建实例对象  
 后者使用Object.create()继承前者的属性和方法
+## this关键字
+this就是属性或方法“当前”所在的对象  
+### 实质  
+this设计目的是在函数体内部，指代函数当前的运行环境  
+### 使用场合  
+- 全局环境 全局环境使用this，指的是顶层对象window  
+- 构造函数 构造函数中的this,指的是实例对象  
+- 对象方法 对象方法里包含this,this指向方法运行时所在的对象  
+> 将嵌套对象内部方法赋值给一个变量，this指向全局对象；可只将对象赋值给变量，this的指向就不会变  
+### 使用注意点  
+- 避免多层this  
+```
+//定义变量that，固定指向外层的this,然后在内层使用that,就不会发生this指向的改变  
+var o={
+  f1:function(){
+    console.log(this);
+    var that=this;
+    var f2=function(){
+      console.log(that);
+    }();
+  }
+}
+o.f1()
+//Object
+//Object
+```
+- 避免数组处理方法中的this  
+数组的map和foreach方法中函数做参数时，函数内部不该使用this  
+> 将this当做foreach方法的第二个参数，固定它的运行环境
+```
+var 0={
+  v:'hello',
+  p:['a1','a2'],
+  f:function f(){
+    this.p.forEach(function(item){
+      console.log(this.v+''+item);
+    },this);
+  }
+}
+o.f1()
+//hello a1
+//hello a2
+```
+- 避免回调函数中的this  
+### 绑定this的方法  
+- Function.prototype.call()
+1.函数实例的call()可以指定函数内部this的指向，然后在所指定的作用域中，调用该函数  
+2.call()参数为空、null和undefined，则默认传入全局对象  
+3.call()参数是一个原始值，那么这个原始值会自动转成对应的包装对象  
+4.call()接受多参数，第一个参数是this指向的对象，后面的参数是函数调用所需的参数  
+- Function.prototype.apply()
