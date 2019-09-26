@@ -72,9 +72,46 @@ o.f1()
 ```
 - 避免回调函数中的this  
 ### 绑定this的方法  
-- Function.prototype.call()
+- Function.prototype.call()  
 1.函数实例的call()可以指定函数内部this的指向，然后在所指定的作用域中，调用该函数  
 2.call()参数为空、null和undefined，则默认传入全局对象  
 3.call()参数是一个原始值，那么这个原始值会自动转成对应的包装对象  
 4.call()接受多参数，第一个参数是this指向的对象，后面的参数是函数调用所需的参数  
 - Function.prototype.apply()
+1.apply()改变this指向，调用该函数，它接收一个数组作为函数执行时的参数  
+2.应用
+```
+//找出数组最大元素
+var a=[10,2,3,16,8,9];
+Math.max.apply(null,a)  //16
+```
+```
+//将数组的空元素变为undefined
+Array.apply(null,['a',,'b'])  //['a',undefined,'b']
+```
+```
+//转换类似数组的对象
+//被处理对象必须具有length属性
+Array.prototype.slice.apply({0:1,length:1})   //[1]
+```
+```
+//绑定回调函数的对象
+//由于apply/call会立即执行，所以要把绑定语句放在一个函数体里
+var o = new Object();
+o.f = function () {
+  console.log(this === o);
+}
+var f = function (){
+  o.f.apply(o);
+  // 或者 o.f.call(o);
+};
+// jQuery 的写法
+$('#button').on('click', f);
+```
+- Function.prototype.bind()
+1.bind()用于将函数体内的this绑定到某个对象，然后返回一个新函数  
+2.bind()可以接受更多的参数，将这些参数绑定原函数的参数  
+3.注意点  
+①每一次返回一个新函数--事件监听时绑定函数名称  
+②结合回调函数使用  
+③结合call方法使用  
