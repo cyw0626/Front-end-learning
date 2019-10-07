@@ -162,3 +162,10 @@ function copyObject(orig) {
   );
 }
 ```
+### 严格模式
+```
+//置于头部
+'use strict';
+```
+严格模式创设eval作用域，eval所生成的变量只用于eval内部
+
