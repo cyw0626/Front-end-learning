@@ -144,3 +144,21 @@ var module1 = (function (mod) {
 
 })( jQuery, window, document );
 ```
+## Object对象的相关方法  
+- Object.getPrototypeOf()方法返回参数对象的原型  
+- Object.setPrototypeOf()方法为参数对象设置原型，返回该参数对象，它接受两个参数，第一个是现有对象，第二个是原型对象  
+- Object.create()方法接受一个对象作为参数，以它为原型返回一个实例对象  
+- Object.prototype.isPrototypeOf()用来判断该对象是否为参数对象的原型  
+- Object.prototype._proto_返回该对象原型，该属性可读写  
+- Object.getOwnPropertyNames()方法返回一个数组，成员是参数对象本身所有属性的键名，不包含继承的属性键名  
+- Object.prototype.hasOwnProperty()方法返回一个布尔值判断某个属性定义在对象自身还是原型链上  
+- in 运算符返回布尔值判断一个对象是否具有该属性，for...in可遍历对象所有可遍历属性  
+- 对象的拷贝
+```
+function copyObject(orig) {
+  return Object.create(
+    Object.getPrototypeOf(orig),
+    Object.getOwnPropertyDescriptors(orig)
+  );
+}
+```
