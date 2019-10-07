@@ -30,3 +30,117 @@ C.prototype.method1=function(...){...};
 1.instanceof运算符返回一个布尔值，表示对象是否为某个构造函数的实例(除了null)  
 2.instanceof可以判断对象的类型  
 ### 构造函数的继承
+一个函数继承另一个构造函数，第一步在子类的构造函数中调用父类构造函数；第二部让子类继承父类原型  
+```
+//Rectangle构造函数继承Shape
+function Rectangle(){
+  Shape.call(this);
+}
+Rectangle.prototype=Object.create(Shape.prototype);
+Rectangle.prototype.constructor=Rectangle;
+```
+### 多重继承
+```
+//子类S继承父类M1和M2
+function M1() {
+  this.hello = 'hello';
+}
+
+function M2() {
+  this.world = 'world';
+}
+
+function S() {
+  M1.call(this);
+  M2.call(this);
+}
+
+// 继承 M1
+S.prototype = Object.create(M1.prototype);
+// 继承链上加入 M2
+Object.assign(S.prototype, M2.prototype);
+
+// 指定构造函数
+S.prototype.constructor = S;
+
+var s = new S();
+s.hello // 'hello'
+s.world // 'world'
+```
+### 模块
+- 基本实现方法：把模块写成一个对象，所有模块成员放到这个对象里面  
+ ```
+ var module= new Object({
+    _count:0,
+    m1:function(){
+      //...
+    },
+    m2:function(){
+      //...
+    }
+});
+```
+- 构造函数写法封装私有变量  
+```
+function StringBuilder(){
+  this._buffer=[];
+}
+StringBuilder.prototype={
+  constructor:StringBuilder,
+  add:function(str){
+    this._buffer.push(str);
+  },
+  toString:function(){
+    return this._buffer.join('');
+  }
+}
+```
+- 立即执行函数封装私有变量
+```
+var module1 = (function () {
+　var _count = 0;
+　var m1 = function () {
+　  //...
+　};
+　var m2 = function () {
+　　//...
+　};
+　return {
+　　m1 : m1,
+　　m2 : m2
+　};
+})();
+```
+> 宽放大模式：
+```
+var module1 = (function (mod) {
+　//...
+　return mod;
+})(window.module1 || {});
+```
+> 输入全局变量
+```
+//finalCarousel对象输出到全局，对外暴露init和destroy接口，内部方法go、handleEvents、initialize、dieCarouselDie都是外部无法调用的
+
+(function($, window, document) {
+
+  function go(num) {
+  }
+
+  function handleEvents() {
+  }
+
+  function initialize() {
+  }
+
+  function dieCarouselDie() {
+  }
+
+  //attach to the global scope
+  window.finalCarousel = {
+    init : initialize,
+    destroy : dieCarouselDie
+  }
+
+})( jQuery, window, document );
+```
