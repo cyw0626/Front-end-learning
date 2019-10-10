@@ -110,3 +110,13 @@ function launcher() {
 
 launcher();
 ```
+## 定时器
+### setTimeout()、setInterval()
+1.setTimeout()用来指定某个函数或某段代码，在多少毫秒之后执行。它返回一个整数，表示定时器的编号。
+```
+var timeId=setTimeout(func|code,delay);
+```
+> 如果回调函数是对象的方法，setTimeout使方法内部的this关键字指向全局环境  
+2.setInterval()指定某个任务每隔一段时间就执行一次。
+### clearTimeout()、clearInterval()
+clearTimeout(id)\clearInterval(id)取消相应的定时器  
