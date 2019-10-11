@@ -120,3 +120,34 @@ var timeId=setTimeout(func|code,delay);
 2.setInterval()指定某个任务每隔一段时间就执行一次。
 ### clearTimeout()、clearInterval()
 clearTimeout(id)\clearInterval(id)取消相应的定时器  
+### debounce函数
+防止用户连续击键，采用debounce(防抖动)
+```
+$('textarea').on('keydown',debounce(ajaxAction,2500));
+function debounce(fn,delay){
+  var timer=null; //声明定时器
+  return function(){
+    var context=this;
+    var args=arguments;
+    clearTimeout(timer);
+    timer=setTimeout(function(){
+      fn.apply(context,args);
+    },delay);
+  };
+}
+```
+### setTimeout(f,0)
+- 含义：当前脚本的同步任务，全部处理完后才会执行setTimeout指定的回调函数f  
+- 调整事件的顺序
+- 分成多个小任务
+```
+var div=document.getElementsByTagName('div')[0];
+var timer;
+var i=0x100000;
+function func(){
+  timer=setTimeout(func,0);
+  div.style.backgroundColor='#'+i.toString(16);
+  if(i++==0xFFFFFF) clearTimeout(timer);
+}
+timer=setTimeout(func,0);
+```
