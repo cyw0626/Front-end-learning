@@ -1,0 +1,39 @@
+# DOM
+## 概述
+DOM是JavaScript操作网页的接口，称为“文档对象模型(Document Object Model)”。它的作用是将网页转为一个JavaScript对象，从而可以用脚本进行操作。  
+节点类型：  
+- Document:整个文档树的顶层节点  
+- DocumentType:doctype标签(比如<!DOCTYPE html>)  
+- Element:网页的各种HTML标签(比如<body>、<a>)  
+- Attribute:网页元素的属性(比如class="right")  
+- Text:标签之间或标签包含的文本  
+- Comment:注释  
+- DocumentFragment:文档的片段  
+## Node接口  
+### 属性  
+- Node.prototype.nodeType属性返回一个整数值，表示节点的类型  
+- Node.prototype.nodeName属性返回节点的名称  
+- Node.prototype.nodeValue属性返回一个字符串，表示当前节点本身的文本值，该属性可读写  
+- Node.prototype.textContent属性返回当前节点和它的所有后代节点的文本内容  
+- Node.prototype.baseURI属性返回一个字符串，表示当前网页的绝对路径。浏览器根据这个属性，计算网页上相对路径URL。该属性为只读  
+- Node.prototype.ownerDocument属性返回当前节点所在的顶层文档对象，即document对象  
+- Node.prototype.nextSibling属性返回紧跟当前节点后面的第一个同级节点，没有则返回null  
+- Node.prototype.previousSibling属性返回当前节点前面的、距离最近的一个同级节点，没有则返回null  
+- Node.prototype.parentNode属性返回当前节点的父节点  
+- Node.prototype.parentElemnt属性返回当前节点的父元素节点  
+- Node.prototype.firstChild属性返回当前节点的第一个子节点，lastChild属性返回当前节点的最后一个子节点  
+- Node.prototype.childNodes属性返回一个类似数组的对象，成员包括当前节点的所有子节点  
+- Node.prototype.isConnected属性返回一个布尔值，表示当前节点是否在文档之中  
+### 方法
+- Node.prototype.appendChild()方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点，该方法的返回值就是插入文档的子节点  
+- Node.prototype.hasChildNodes()方法返回一个布尔值，表示当前节点是否有子节点  
+- Node.prototype.cloneNode()方法用于克隆一个节点，它接受一个布尔值作为参数，表示是否同时克隆子节点。它的返回值是以一个克隆出来的新节点  
+- Node.prototype.insertBefore()方法用于将某个节点插入父节点内部的指定位置  
+- Node.prototype.removeChild()方法接受一个子节点作为参数，用于从当前值移除该子节点。返回值是移除的子节点  
+- Node.prototype.replaceChild()方法用于将一个新的节点，替换当前节点的某一个子节点  
+- Node.prototype.contains()方法返回一个布尔值，表示参数节点满足：为当前节点；为当前节点的子节点；为当前节点的后代节点  
+- Node.prototype.compareDocumentPosition()返回一个六个比特位的二进制值，表示参数节点与当前节点的关系  
+- Node.prototype.isEqualNode()方法返回一个布尔值，用于检查两个节点是否相等。所谓相等的节点，指的是两个节点的类型相同、属性相同、子节点相同  
+- Node.prototype.isSameNode()方法返回一个布尔值，表示两个节点是否为同一个节点  
+- Node.prototype.normalize()方法用于清理当前节点内部的所有文本节点（text）。它会去除空的文本节点，并且将毗邻的文本节点合并成一个  
+- Node.prototype.getRootNode()方法返回当前节点所在文档的根节点document，可用于document节点自身
