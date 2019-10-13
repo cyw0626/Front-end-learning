@@ -41,7 +41,8 @@ DOM是JavaScript操作网页的接口，称为“文档对象模型(Document Obj
 ### NodeList接口  
 1.NodeList实例是一个类似数组的对象，它的成员是节点对象，可以使用length和forEach方法，通过以下实例得到    
 - Node.childNodes  
-- document.querySelectorAll()
+- document.querySelectorAll()  
+
 2.NodeList.prototype.length属性返回NodeList实例包含的节点数量  
 3.NodeList.prototype.forEach()方法用于遍历NodeList的所有成员  
 4.NodeList.prototype.item()接受一个整数值作为参数，表示成员的位置，返回该位置上的成员  
@@ -53,3 +54,14 @@ DOM是JavaScript操作网页的接口，称为“文档对象模型(Document Obj
 4.HTMLCollection.prototype.item()方法接受一个整数值作为参数，表示成员的位置，返回该位置上的成员  
 5.HTMLCollection.prototype.namedItem()方法的参数是一个字符串，表示id属性或name属性的值，返回对应的元素节点  
 ## ParentNode接口，ChildNode接口  
+### ParentNode接口  
+1.只有元素节点(element)、文档节点(document)、文档片段节点(documentFragment)用于子节点  
+2.ParentNode.children属性返回一个HTMLCollection实例，成员是当前节点的所有元素子节点。该属性只读  
+3.ParentNode.firstElementChild属性返回当前节点的第一个元素子节点   
+4.ParentNode.lastElementChild属性返回当前节点的最后一个元素子节点  
+5.ParentNode.childElementCount属性返回一个整数，表示当前节点的所有元素子节点的数目  
+6.ParentNode.append()方法为当前节点追加一个或多个子节点，位置是最后一个元素子节点的后面，ParentNode.prepend()方法为当前节点追加一个或多个子节点，位置是第一个元素子节点的前面  
+### ChildNode接口  
+1.ChildNode.remove()方法用于从父节点移除当前节点  
+2.ChildNode.before()方法用于在当前节点的前面，插入一个或多个同级节点，ChildNode.after()方法用于在当前节点的后面，插入一个或多个同级节点，两者拥有相同的父节点   
+3.ChildNode.replaceWith()方法使用参数节点，替换当前节点
