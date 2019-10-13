@@ -37,3 +37,19 @@ DOM是JavaScript操作网页的接口，称为“文档对象模型(Document Obj
 - Node.prototype.isSameNode()方法返回一个布尔值，表示两个节点是否为同一个节点  
 - Node.prototype.normalize()方法用于清理当前节点内部的所有文本节点（text）。它会去除空的文本节点，并且将毗邻的文本节点合并成一个  
 - Node.prototype.getRootNode()方法返回当前节点所在文档的根节点document，可用于document节点自身
+## NodeList接口、HTMLCollection接口  
+### NodeList接口  
+1.NodeList实例是一个类似数组的对象，它的成员是节点对象，可以使用length和forEach方法，通过以下实例得到    
+- Node.childNodes  
+- document.querySelectorAll()
+2.NodeList.prototype.length属性返回NodeList实例包含的节点数量  
+3.NodeList.prototype.forEach()方法用于遍历NodeList的所有成员  
+4.NodeList.prototype.item()接受一个整数值作为参数，表示成员的位置，返回该位置上的成员  
+5.通过for...of循环遍历，NodeList.prototype.keys()返回键名的遍历器，NodeList.prototype.values()返回键值的遍历器，NodeList.prototype.entries()返回的遍历器同时包含键名和键值  
+### HTMLCollection接口  
+1.HTMLCollection是一个节点对象的集合，只能包含元素节点，返回值是一个类似数组的对象，只能用for循环遍历  
+2.返回主要是一些Document对象的集合属性，比如document.links、document.forms、document.images  
+3.HTMLCollection.prototype.length返回HTMLCollection实例包含的成员数量  
+4.HTMLCollection.prototype.item()方法接受一个整数值作为参数，表示成员的位置，返回该位置上的成员  
+5.HTMLCollection.prototype.namedItem()方法的参数是一个字符串，表示id属性或name属性的值，返回对应的元素节点  
+## ParentNode接口，ChildNode接口  
