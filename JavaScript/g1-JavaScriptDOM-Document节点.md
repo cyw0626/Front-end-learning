@@ -1,0 +1,51 @@
+# DOM  
+## Document节点  
+### 概述  
+document节点对象代表整个文档，每张网页都有自己的document对象。window.document属性就指向这个对象  
+### 属性  
+#### 快捷方式属性  
+- document.defaultView属性返回document对象所属的window对象  
+- document.doctype属性返回```<!DOCTYPE html>```  
+- document.documentElement属性返回```<html>```  
+- document.body,document.head  
+- document.scrollingElement属性返回文档的滚动元素  
+- document.activeElement属性返回当前焦点的DOM元素  
+- document.fullscreenElement属性返回当前以全屏状态展示的DOM元素  
+#### 节点集合属性  
+- document.links属性返回当前文档所有设定了href属性的```<a>```及```<area>```节点  
+- document.forms属性返回所有```<form>```表单节点  
+- document.images,document.embeds、document.plugins,document.scripts,document.styleSheets  
+#### 文档静态信息属性  
+- document.documentURI,document.URI属性返回一个字符串，表示当前文档的网址  
+- document.domain属性返回当前文档的域名，不包含协议和端口  
+- document.location提供URL相关的信息和操作方法  
+- document.lastModified属性返回一个字符串，表示当前文档的最后修改时间  
+- document.title,document.characterSet,document.reffer.document.dir,document.compatMode  
+#### 文档状态属性  
+- document.hidden属性返回一个布尔值，表示当前页面是否可见  
+- document.visibilityState返回文档的可见状态  
+- document.readyState属性返回当前文档的状态，loading\interactive\complete  
+- document.cookie、document.designMode属性控制当前文档是否可编辑  
+- document.implementation属性返回一个DOMImplementation对象，用于创建XML、HTML、DocumentType对象  
+### 方法  
+- document.open()方法清除当前文档所有内容，使得文档处于可写状态,document.close()方法用来关闭document.open()打开的文档  
+- document.write()方法用于向当前文档写入内容，document.writeln方法会在输出内容的尾部添加换行符  
+- document.querySelector()方法接受一个 CSS 选择器作为参数，返回匹配该选择器的元素节点，document.querySelectorAll方法返回一个NodeList对象，包含所有匹配给定选择器的节点  
+- document.getElementsByTagName()返回一个类似数组对象  
+- document.getElementsByClassName()方法返回一个包括所有class名字符合指定条件的元素的类似数组对象  
+- document.getElemnetsByName()方法选择拥有name属性的HTML元素的一个类似数组的对象  
+- document.getElementById()方法返回匹配指定id属性的元素节点  
+- document.elementFromPoint()方法返回位于页面指定位置最上层的元素节点，document.elementsFromPoint()返回一个数组，成员是位于指定坐标（相对于视口）的所有元素  
+- document.createElement()方法用来生成元素节点，并返回该节点  
+- document.createTextNode()方法用来生成文本节点（Text实例），并返回该节点  
+- document.createAttribute()方法生成一个新的属性节点（Attr实例）  
+- document.createComment()方法生成一个新的注释节点，并返回该节点  
+- document.createDocumentFragment()方法生成一个空的文档片段对象  
+- document.createEvent()方法生成一个事件对象（Event实例），该对象可以被element.dispatchEvent方法使用，触发指定事件  
+- document.addEventListener()，document.removeEventListener()，document.dispatchEvent()这三个方法用于处理document节点的事件  
+- document.hasFocus()方法返回一个布尔值，表示当前文档之中是否有元素被激活或获得焦点  
+- document.adoptNode()方法将某个节点及其子节点，从原来所在的文档或DocumentFragment里面移除，归属当前document对象，返回插入后的新节点;document.importNode()方法则是从原来所在的文档或DocumentFragment里面，拷贝某个节点及其子节点，让它们归属当前document对象  
+- document.createNodeIterator()方法返回一个子节点遍历器  
+- document.createTreeWalker()方法返回一个 DOM 的子树遍历器  
+- document.execCommand()改变内容的样式，document.queryCommandSupported()方法返回一个布尔值，表示浏览器是否支持document.execCommand()的某个命令，document.queryCommandEnabled()方法返回一个布尔值，表示当前是否可用document.execCommand()的某个命令  
+- document.getSelection()指向window.getSelection()
