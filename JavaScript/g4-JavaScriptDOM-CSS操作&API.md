@@ -95,3 +95,78 @@ window.matchMedia方法用来将CSS的MediaQuery条件语句转化成一个Media
 - MediaQueryList.onchange属性用来指定change事件的监听函数  
 ##### MediaQueryList接口的实例方法  
 MediaQueryList 实例有两个方法MediaQueryList.addListener()和MediaQueryList.removeListener()，用来为change事件添加或撤销监听函数  
+## Mutation Observer API  
+Mutation Abserver API用来监视DOM变动，是异步触发，DOM的变动并不会马上触发，而是要等到当前所有DOM操作结束后才触发  
+- 异步触发方式  
+- 把DOM变动记录封装成一个数组进行处理  
+- 既可以观察DOM的所有类型变动，也可以指定只观察某一类型的变动  
+### MutationObservera构造函数  
+新建观察器实例，同时指定这个实例的回调函数  
+```
+var observer=new MutationObserver(callback);  //回调函数接受两个参数：变动数组、观察器实例  
+```
+### MutationObserver的实例方法  
+- observer()用来启动监听，接受两个参数：索要观察的DOM节点、指定所要观察的特定变动  
+- disconnect()方法用来停止观察，takeRecords()返回已检测到但尚未由观察者的回调函数处理的所有匹配DOM更改的列表，使变更队列保持为空  
+### MUtationRecord对象  
+DOM每次发生变化，就会1生成一条变动记录(MutationRecord实例)，该实例包含了与变动相关的所有信息  
+### 应用
+- 子元素变动  
+- 属性的变动  
+- 取代DOMContentLoad事件  
+```
+//使用MutationObserver对象封装一个监听DOM生成的函数  
+(function(win){
+  'use strict';
+
+  var listeners = [];
+  var doc = win.document;
+  var MutationObserver = win.MutationObserver || win.WebKitMutationObserver;
+  var observer;
+
+  function ready(selector, fn){
+    // 储存选择器和回调函数
+    listeners.push({
+      selector: selector,
+      fn: fn
+    });
+    if(!observer){
+      // 监听document变化
+      observer = new MutationObserver(check);
+      observer.observe(doc.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    }
+    // 检查该节点是否已经在DOM中
+    check();
+  }
+
+  function check(){
+  // 检查是否匹配已储存的节点
+    for(var i = 0; i < listeners.length; i++){
+      var listener = listeners[i];
+      // 检查指定节点是否有匹配
+      var elements = doc.querySelectorAll(listener.selector);
+      for(var j = 0; j < elements.length; j++){
+        var element = elements[j];
+        // 确保回调函数只会对该元素调用一次
+        if(!element.ready){
+          element.ready = true;
+          // 对该节点调用回调函数
+          listener.fn.call(element, element);
+        }
+      }
+    }
+  }
+
+  // 对外暴露ready
+  win.ready = ready;
+
+})(this);
+
+// 使用方法
+ready('.foo', function(element){
+  // ...
+});
+```
