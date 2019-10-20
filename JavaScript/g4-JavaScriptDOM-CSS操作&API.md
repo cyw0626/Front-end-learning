@@ -50,6 +50,48 @@ CSS为元素是通过CSS向DOM添加的元素，主要是通过:before和:after�
 - CSSStyleSheet.insertRule方法用于在当前样式表的插入一个新的 CSS 规则  
 - CSSStyleSheet.deleteRule方法用来在样式表里面移除一条规则，它的参数是该条规则在cssRules对象中的位置  
 #### 实例：添加样式表  
-#### CSSRuleList接口  
+- 添加内置样式表，在文档中添加一个<style>节点
+```
+var style=document.createElement('style');
+style.setAttribute('media','screen');
+style.innerHTML='body{color:red}';
+document.head.appendChild(style);
+  
+var style=(function(){
+  var style=document.createElement('style');
+  document.head.appendChild(style);
+  return style;})();
+style.sheet.insertRule('.foo{color:red}',0);
+```
+- 添加外部样式表，在文档中添加一个<link>节点，然后将href属性指向外部样式表的URL  
+```
+var linkElm=document.createElement('link');
+linkElm.setAttribute('rel','stylesheet');
+linkElm.setAttribute('type','text/css');
+linkElm.setAttribute('href','reset-min.css');
+document.head.appendChild(linkElm);
+```
+#### CSSRuleList接口   
+通过StyleSheet.cssRules属性，获取CSSRuleList实例，CSSRuleList接口是一个类似数组的对象，表示一组CSS规则，成员都是CSSRule实例  
 #### CSSRule接口  
+##### 概述  
+一条CSS规则包括两个部分：CSS选择器和样式声明  
+##### CSSRule实例的属性  
+- CSSRule.cssText属性返回当前规则的文本  
+- CSSRule.parentStyleSheet返回当前规则所在样式表对象  
+- CSSRule.parentRule属性返回包含当前规则的父规则  
+- CSSRule.type属性返回一个整数值，表示当前规则的类型  
+##### CSSStyleRule接口  
+- CSSStyleRule.selectorText属性返回当前规则的选择器  
+- CSSStyleRule.style属性返回一个对象（CSSStyleDeclaration 实例），代表当前规则的样式声明，也就是选择器后面的大括号里面的部分  
+##### CSSMediaRule接口  
+如果一条 CSS 规则是@media代码块，那么它除了 CSSRule 接口，还部署了 CSSMediaRule 接口  
 #### window.matchMedia()  
+##### 基本用法  
+window.matchMedia方法用来将CSS的MediaQuery条件语句转化成一个MediaQueryList实例  
+##### MediaQueryList接口的实例属性  
+- MediaQueryList.meida属性返回一个字符串，表示对应的MediaQuery条件语句  
+- MediaQueryList.matches属性返回一个布尔值，表示当前页面是否符合指定的 MediaQuery 条件语句  
+- MediaQueryList.onchange属性用来指定change事件的监听函数  
+##### MediaQueryList接口的实例方法  
+MediaQueryList 实例有两个方法MediaQueryList.addListener()和MediaQueryList.removeListener()，用来为change事件添加或撤销监听函数  
