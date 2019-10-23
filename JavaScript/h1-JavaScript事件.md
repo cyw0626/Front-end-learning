@@ -76,9 +76,43 @@ window.addEventListener('mousemove',function(event){
 - Event.stopImmediatePropagation阻止同一个事件的其他监听函数被调用，不管监听函数定义在当前节点还是其他节点  
 - Event.composedPath()返回一个数组，成员是事件的最底层节点和依次冒泡经过的所有上层节点  
 ## 鼠标事件  
-
-
-
-
-
+鼠标事件指与鼠标相关的事件，继承了MouseEvent接口  
+- click:按下鼠标时触发//mousedown-mouseup-click  
+- dbclick:在同一个元素上双击鼠标时触发  
+- mousedown:按下鼠标键时触发  
+- mouseup：释放按下的鼠标键时触发  
+- mousemove:当鼠标在一个节点内部移动时触发  
+- mouseenter:鼠标进入一个节点时触发，进入子节点不会触发这个事件  
+- mouseover:鼠标进入一个节点时触发，进入子节点会再一次触发这个事件  
+- mouseout:鼠标离开一个节点时触发，离开父节点也会触发这个事件  
+- mouseleave:鼠标离开一个节点时触发，离开父节点不会触发这个事件  
+- contextmenu:按下鼠标右键时触发  
+- wheel:滚动鼠标的滚轮时触发  
+### MouseEvent接口概述  
+```
+var event=new MouseEvent(type,options);
+//type--字符串，表示事件名称  
+```
+- screenX,screenY数值，鼠标相对于屏幕的水平和垂直位置  
+- clientX,clientY数值，鼠标相对于程序窗口的水平和垂直位置  
+- crtlKey,shiftKey,altKey,metaKey布尔值，是否同时按下键  
+- button,buttons数值，表示按下哪个鼠标键  
+- relatedTarget:节点对象，表示事件的相关节点  
+### MouseEvent接口的实例属性  
+- MouseEvent.altKey、MouseEvent.ctrlKey、MouseEvent.metaKey、MouseEvent.shiftKey这四个属性都返回一个布尔值，表示事件发生时，是否按下对应的键。它们都是只读属性  
+- MouseEvent.button属性返回一个数值，表示事件发生时按下了鼠标的哪个键；MouseEvent.buttons属性返回一个三个比特位的值，表示同时按下了哪些键  
+- MouseEvent.clientX属性返回鼠标位置相对于浏览器窗口左上角的水平坐标（单位像素），MouseEvent.clientY属性返回垂直坐标   
+- MouseEvent.movementX属性返回当前位置与上一个mousemove事件之间的水平距离（单位像素）；MouseEvent.movementY属性返回当前位置与上一个mousemove事件之间的垂直距离（单位像素）  
+- MouseEvent.screenX属性返回鼠标位置相对于屏幕左上角的水平坐标（单位像素），MouseEvent.screenY属性返回垂直坐标。  
+- MouseEvent.offsetX属性返回鼠标位置与目标节点左侧的padding边缘的水平距离（单位像素），MouseEvent.offsetY属性返回与目标节点上方的padding边缘的垂直距离  
+- MouseEvent.pageX属性返回鼠标位置与文档左侧边缘的距离（单位像素），MouseEvent.pageY属性返回与文档上侧边缘的距离（单位像素）  
+- MouseEvent.relatedTarget属性返回事件的相关节点  
+### MouseEvent接口的实例属性  
+- MouseEvent.getModifierState()返回布尔值，表示有没有按下的特定的功能键  
+### WheelEvent接口  
+WheelEvent 接口继承了 MouseEvent 实例，代表鼠标滚轮事件的实例对象  
+- WheelEvent.deltaX：数值，表示滚轮的水平滚动量   
+- WheelEvent.deltaY：数值，表示滚轮的垂直滚动量   
+- WheelEvent.deltaZ：数值，表示滚轮的 Z 轴滚动量   
+- WheelEvent.deltaMode：数值，表示上面三个属性的单位，0是像素，1是行，2是页  
 
