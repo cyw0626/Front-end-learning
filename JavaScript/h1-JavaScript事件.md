@@ -115,4 +115,33 @@ WheelEvent 接口继承了 MouseEvent 实例，代表鼠标滚轮事件的实例
 - WheelEvent.deltaY：数值，表示滚轮的垂直滚动量   
 - WheelEvent.deltaZ：数值，表示滚轮的 Z 轴滚动量   
 - WheelEvent.deltaMode：数值，表示上面三个属性的单位，0是像素，1是行，2是页  
-
+## 键盘事件  
+键盘事件由用户击打键盘触发，主要有keydown、keypress、keyup三个事件  
+- keydown:按下键盘时触发  
+- keypress:按下有值的键时触发  
+- keyup:松开键盘时触发  
+### KeyboardEvent接口概述   
+```
+//type--字符串，表示事件类型  
+new KeyboardEvent(type,options)
+```
+- key：字符串，当前按下的键，默认为空字符串。   
+- code：字符串，表示当前按下的键的字符串形式，默认为空字符串。  
+- location：整数，当前按下的键的位置，默认为0。  
+- ctrlKey：布尔值，是否按下 Ctrl 键，默认为false。  
+- shiftKey：布尔值，是否按下 Shift 键，默认为false。  
+- altKey：布尔值，是否按下 Alt 键，默认为false。  
+- metaKey：布尔值，是否按下 Meta 键，默认为false。  
+- repeat：布尔值，是否重复按键，默认为false。  
+### KeyboardEvent的实例属性  
+- KeyboardEvent.altKey：是否按下 Alt 键  
+- KeyboardEvent.ctrlKey：是否按下 Ctrl 键
+- KeyboardEvent.metaKey：是否按下 meta 键（Mac 系统是一个四瓣的小花，Windows 系统是 windows 键）  
+- KeyboardEvent.shiftKey：是否按下 Shift 键    
+- KeyboardEvent.code属性返回一个字符串，表示当前按下的键的字符串形式  
+- KeyboardEvent.key属性返回一个字符串，表示按下的键名    
+- KeyboardEvent.location属性返回一个整数，表示按下的键处在键盘的哪一个区域    
+- KeyboardEvent.repeat返回一个布尔值，代表该键是否被按着不放，以便判断是否重复这个键，即浏览器会持续触发keydown和keypress事件，直到用户松开手为止   
+### KeyboardEvent的实例方法  
+- KeyboardEvent.getModifierState()返回一个布尔值，表示是否按下或激活指定的功能键  
+//Alt：Alt 键；CapsLock：大写锁定键；Control：Ctrl 键；Meta：Meta 键；NumLock：数字键盘开关键；Shift：Shift 键  
