@@ -126,8 +126,36 @@ function handleMove(evt) {
   }
 }
 ```
-
-
+## 拖拉事件  
+拖拉（drag）指的是，用户在某个对象上按下鼠标键不放，拖动它到另一个位置，然后释放鼠标键，将该对象放在那里。  
+- drag:拖拉过程中，在被拖拉的节点上持续触发（相隔几百毫秒）  
+- dragstart：用户开始拖拉时，在被拖拉的节点上触发，该事件的target属性是被拖拉的节点  
+- dragend：拖拉结束时（释放鼠标键或按下 ESC 键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点  
+- dragenter：拖拉进入当前节点时，在当前节点上触发一次，该事件的target属性是当前节点  
+- dragover：拖拉到当前节点上方时，在当前节点上持续触发（相隔几百毫秒），该事件的target属性是当前节点  
+- dragleave：拖拉操作离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点   
+- drop：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发   
+### DragEvent接口
+```
+new DragEvent(type,options)
+```
+### DataTransfer接口概述  
+所有拖拉事件的实例都有一个DataEvent.dataTransfer属性，用来读写需要传递的数据  
+浏览器原生提供一个DataTransfer()构造函数，用来生曾DataTransfer实例对象  
+```
+var dataTrans=new DataTransfer();//不接受参数
+```
+### DataTransfer的实例属性  
+- DataTransfer.dropEffect属性用来设置放下被拖拉节点时的效果，会影响到拖拉经过相关区域时鼠标的形状  
+- DataTransfer.effectAllowed属性设置本次拖拉中允许的效果  
+- DataTransfer.files属性是一个 FileList 对象，包含一组本地文件，可以用来在拖拉操作中传送  
+- DataTransfer.types属性是一个只读的数组，每个成员是一个字符串，里面是拖拉的数据格式  
+- DataTransfer.items属性返回一个类似数组的只读对象（DataTransferItemList 实例），每个成员就是本次拖拉的一个对象（DataTransferItem 实例）  
+### DataTransfer的实例方法  
+- DataTransfer.setData()方法用来设置拖拉事件所带有的数据  
+```
+event.dataTransfer.setData('text/plain','Text to drag');
+```
 
 
 
