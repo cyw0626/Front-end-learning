@@ -73,8 +73,59 @@ function myFunction(e){
   conosle.log(e.data)
 }
 ```
-
-
+## 触摸事件  
+### 触摸操作描述  
+浏览器的触摸API由三个部分组成：Touch,TouchList,TouchEvent，使用event.preventDefault方法阻止发出鼠标事件  
+### Touch接口  
+Touch接口代表单个触摸点，浏览器原生提供Touch构造函数，用来生成Touch实例  
+```
+var touch=new Touch(touchOptions);
+```
+#### Touch接口的实例属性  
+- Touch.identifier属性返回一个整数，表示触摸点的唯一ID  
+- Touch.screenX，Touch.screenY，Touch.clientX，Touch.clientY，pageX，pageY  
+- Touch.radiusX，Touch.radiusY，Touch.rotationAngle  
+- Touch.force属性返回一个0-1之间的数值，表示触摸压力  
+- Touch.target属性返回一个元素节点，代表触摸发生时所在的哪个元素节点  
+#### TouchList接口
+TouchList接口表示一组触摸点的集合  
+- TouchList.length:数值，表示触摸点数量  
+- TouchList.item():返回指定位置的成员，它的参数是该成员的位置编号  
+#### TouchEvent接口  
+浏览器原生提供TouchEvent()构造函数，用来生成触摸事件的实例  
+```
+new TouchEvent(type,options)
+```
+##### 实例属性  
+- TouchEvent.altKey，TouchEvent.ctrlKey，TouchEvent.shiftKey，TouchEvent.metaKey表示触摸时是否按下Alt\Ctrl\Shift\Windows键  
+- TouchEvent.changeTouches属性返回一个TouchList实例，成员是一组Touch实例对象，表示本次触摸事件的相关触摸点  
+- TouchEvent.touches属性返回一个TouchList实例，成员是所有仍然处于活动状态的触摸点  
+- TouchEvent.targetTouches属性返回一个TouchList实例，成员是触摸事件的目标元素节点内部，所有仍然处于活动状态的触摸点   
+#### 触摸事件的种类  
+- touchstart：用户开始触摸时触发，它的target属性返回发生触摸的元素节点。
+- touchend：用户不再接触触摸屏时（或者移出屏幕边缘时）触发，它的target属性与touchstart事件一致的，就是开始触摸时所在的元素节点。它的changedTouches属性返回一个TouchList实例，包含所有不再触摸的触摸点（即Touch实例对象）。
+- touchmove：用户移动触摸点时触发，它的target属性与touchstart事件一致。如果触摸的半径、角度、力度发生变化，也会触发该事件。
+- touchcancel：触摸点取消时触发，比如在触摸区域跳出一个模态窗口（modal window）、触摸点离开了文档区域（进入浏览器菜单栏）、用户的触摸点太多，超过了支持的上限（自动取消早先的触摸点）。
+```
+var el=document.getElementByTagName('canvas')[0];
+el.addEventListener('touchstart',handleStart,false);
+el.addEventListener('touchmove',handleMove,false);
+function handleStart(evt){
+  evt.preventDefault();
+  var touches=evt.changedTouches;
+  for(var i=0;i<touches.length;i++){
+    console.log(touch[i].pageX,touch[i].pageY);
+  }
+}
+function handleMove(evt) {
+  evt.preventDefault();
+  var touches = evt.changedTouches;
+  for (var i = 0; i < touches.length; i++) {
+    var touch = touches[i];
+    console.log(touch.pageX, touch.pageY);
+  }
+}
+```
 
 
 
