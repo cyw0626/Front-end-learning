@@ -23,11 +23,11 @@ xhr.addEventListener('error',transferFailed,flase);
 xhr.addEventListener('abort',transferCanceled,flase);
 xhr.open();
 function updateProgress(e){
-	if(e.length	Computable){
-		var percentComplete=e.loaded/e.total;
-	}else{
-		console.log('不能计算进度')；
-	}
+  if(e.length Computable){
+     var percentComplete=e.loaded/e.total;
+   }else{
+     console.log('不能计算进度')；
+   }
 }
 function transferComplete(e) {
   console.log('传输结束');
@@ -39,3 +39,12 @@ function transferCanceled(evt) {
   console.log('用户取消了传输');
 }
 ```
+
+
+
+
+
+
+
+
+
