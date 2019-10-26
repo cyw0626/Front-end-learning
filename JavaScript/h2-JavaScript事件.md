@@ -292,7 +292,15 @@ CustomEvent 接口用于生成自定义的事件实例
 new CustomEvent(type,options)
 //options:只有一个自带的detail属性
 ```
-### 
-
-
-
+### GlobalEventHandlers接口  
+- GlobalEventHandlers.onabort某个对象的abort事件（停止加载）发生时，就会调用onabort属性指定的回调函数  
+- GlobalEventHandlers.onerror方法error事件发生时，就会调用onerror属性指定的回调函数  
+- GlobalEventHandlers.onload元素完成加载时，会触发load事件，执行onload()、对于<img>和<video>等元素，加载开始时还会触发loadstart事件，导致执行onloadstart  
+- GlobalEventHandlers.onfocus，GlobalEventHandlers.onblur当前元素获得焦点时，会触发element.onfocus；失去焦点时，会触发element.onblur  
+- GlobalEventHandlers.onscroll页面或元素滚动时，会触发scroll事件，导致执行onscroll()  
+- GlobalEventHandlers.oncontextmenu用户在页面上按下鼠标的右键，会触发contextmenu事件，导致执行oncontextmenu()。如果该属性执行后返回false，就等于禁止了右键菜单；元素的右键菜单显示时，会触发该元素的onshow监听函数  
+```
+document.oncontextmenu=function(){
+  return false;
+};
+```
