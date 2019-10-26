@@ -156,6 +156,143 @@ var dataTrans=new DataTransfer();//不接受参数
 ```
 event.dataTransfer.setData('text/plain','Text to drag');
 ```
+- DataTransfer.getData()方法接受一个字符串作为参数，返回事件所带的指定类型的数据  
+```
+//getData方法返回的是一个字符串，如果其中包含多项数据，手动解析  
+function doDrop(event){
+  var lines=event.dataTransfer.getData('text/uri-list').split('\n');
+  for(let line of lines){
+    let link=document.createElement('a');
+    link.href=line;
+    link.textContent=line;
+    event.target.appendChild(link);
+  }
+  event.preventDefault();
+}
+```
+- DataTransfer.clearData()方法接受一个字符串作为参数，删除事件所带的指定类型的数据，该方法只能用在dragstart事件的监听函数  
+- DataTransfer.setDragImage()拖动过程中（dragstart事件触发后），浏览器会显示一张图片跟随鼠标一起移动，表示被拖动的节点  
+## 其他常见事件  
+### 资源事件  
+- beforeunload事件在串口、文档、各种资源将要卸载前触发 
+> 用户修改了表单，还没保存就要离开  
+```
+window.addEventListener('beforeunload',function(e){
+  var confirmationMessage='确认关闭窗口？';
+  e.returnValue=confirmationMessage;
+  return confirmationMessage;
+});
+```
+- unload事件  
+unload事件在窗口关闭或document对象将要卸载时触发，它的出发顺序在beforeunload、pagehide后面，这个事件是无法取消的  
+- load事件、error事件  
+load事件在页面或某个资源加载成功时触发；error事件是在页面或资源加载失败时触发。abort事件在用户取消加载时触发  
+### session历史事件
+- pageshow事件、pagehide事件  
+pageshow事件在页面加载时触发，包括第一次加载和从缓存加载两种情况；pegehide事件离开当前页面触发  
+- popstate事件  
+popstate事件在浏览器history对象的当前记录发生显示切换时触发  
+```
+window.onpopstate=function(event){
+  console.log('state:'+ event.state);
+};
+history.pushState({page:1},'title 1','?page=1');
+history.pushState({page:2},'title 2','?page=2');
+history.replaceState({page:3},'title 3','?page=3');
+history.back(); //state:{"page":1}
+history.back();//state:null
+history.go(2);//state:{"page":3}
+```
+- hashchange事件  
+hashchange事件在URL的hash部分(即#号后面的部分，包括#号)发生变化时触发  
+```
+// URL 是 http://www.example.com/
+window.addEventListener('hashchange',myFunction);
+function myFunction(e){
+  console.log(e.oldURL);
+  console.log(e.newURL);
+}
+location.hash='part2';
+// http://www.example.com/
+// http://www.example.com/#part2
+```
+### 网页状态事件  
+- DOMConetentLoaded事件网页下载并解析完成以后，浏览器就会在document对象上触发 DOMContentLoaded 事件   
+- readystatechange事件当 Document 对象和 XMLHttpRequest 对象的readyState属性发生变化时触发：loading、interactive、complete  
+### 窗口事件  
+- scroll事件在文档或文档元素滚动时触发，主要出现在用户拖动滚动条  
+```
+//用requestAnimationFrame控制该事件的触发频率，然后可以结合customEvent抛出一个新事件;requestAnimationFrame方法保证每次页面重绘（每秒60次），只会触发一次scroll事件的监听函数
+(function () {
+  var throttle = function (type, name, obj) {
+    var obj = obj || window;
+    var running = false;
+    var func = function () {
+      if (running) { return; }
+      running = true;
+      requestAnimationFrame(function() {
+        obj.dispatchEvent(new CustomEvent(name));
+        running = false;
+      });
+    };
+    obj.addEventListener(type, func);
+  };
+  // 将 scroll 事件重定义为 optimizedScroll 事件
+  throttle('scroll', 'optimizedScroll');
+})();
+window.addEventListener('optimizedScroll', function() {
+  console.log('Resource conscious scroll callback!');
+});
+//setTimeout方法
+(function() {
+  window.addEventListener('scroll', scrollThrottler, false);
+  var scrollTimeout;
+  function scrollThrottler() {
+    if (!scrollTimeout) {
+      scrollTimeout = setTimeout(function () {
+        scrollTimeout = null;
+        actualScrollHandler();
+      }, 66);
+    }
+  function actualScrollHandler() {
+    // ...
+  }
+}());
+//Date()方法
+function throttle(fn, wait) {
+  var time = Date.now();
+  return function() {
+    if ((time + wait - Date.now()) < 0) {
+      fn();
+      time = Date.now();
+    }
+  }
+}
+window.addEventListener('scroll', throttle(callback, 1000));
+//lodash库函数  
+window.addEventListener('scroll', _.throttle(callback, 1000));
+```
+- resize事件改变浏览器窗口大小时触发，主要发生在window对象上   
+- fullscreenchange事件在进入或退出全屏状态时触发，该事件发生在document对象上面;fullscreenerror事件在浏览器无法切换到全屏状态时触发  
+### 剪贴板事件  
+ClipboardEvent接口实例：cut、copy、paste;clipboraddata是一个DataTransfer对象  
+### 焦点事件  
+焦点事件发生在元素节点和document对象上面，与获得或失去焦点相关。它主要包括以下四个事件。  
+- focus：元素节点获得焦点后触发，该事件不会冒泡。  
+- blur：元素节点失去焦点后触发，该事件不会冒泡。  
+- focusin：元素节点将要获得焦点时触发，发生在focus事件之前。该事件会冒泡。  
+- focusout：元素节点将要失去焦点时触发，发生在blur事件之前。该事件会冒泡。  
+这四个事件都继承了FocusEvent接口。FocusEvent实例具有以下属性。  
+- FocusEvent.target：事件的目标节点。  
+- FocusEvent.relatedTarget：对于focusin事件，返回失去焦点的节点；对于focusout事件，返回将要接受焦点的节点；对于focus和blur事件，返回null。  
+### CustomEvent接口  
+CustomEvent 接口用于生成自定义的事件实例  
+浏览器原生提供CustomEvent()构造函数，用来生成CustomEvent事件实例  
+```
+new CustomEvent(type,options)
+//options:只有一个自带的detail属性
+```
+### 
 
 
 
