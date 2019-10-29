@@ -76,3 +76,70 @@ async属性的作用是，使用另一个进程下载脚本，下载时不会阻
 重流和重绘并不一定一起发生，重流必然导致重绘，重绘不一定需要重流。  
 - JavaScript引擎  
 JavaScript 引擎的主要作用是，读取网页中的 JavaScript 代码，对其处理后运行。  
+## window对象  
+window对象指当前浏览器窗口，是当前页面的顶层对象。一个变量如果未声明，那么默认就是顶层对象的属性  
+### window对象的属性  
+- window.name表示当前浏览器窗口的名字  
+- window.closed返回一个布尔值，表示窗口是否关闭；window.opener属性表示打开当前窗口的父窗口  
+- window.self和window.window都指向窗口本身  
+- window.frames属性返回一个类似数组的对象，成员为页面所有框架窗口，包括frame元素和iframe元素；window.length返回当前网页包含的框架总数  
+- window.frameElement属性用于当前窗口嵌在另一个网页的情况，返回当前窗口所在的那个元素节点  
+- window.top属性在框架窗口里面获取顶层窗口；window.parent属性指向父窗口  
+- window.status属性用于读取浏览器状态栏的文本  
+- window.devicePixelRatio属性返回一个CSS像素的大小与一个物理像素的大小的比率。越大越高清  
+- 位置大小属性window.screenX/window.screenY;window.innerHeight/window.innerWidth;window.outerHeight/window.outerWidth;window.srollX/window.srollY;window.pageXOffset/window.oageYOffset  
+- 组件属性  
+- 全局对象属性  
+- window.isSecureContext  
+### window对象的方法  
+- window.alert()方法弹出的对话框，只有一个“确定”按钮，往往用来通知用户某些信息  
+- window.prompt()方法弹出的对话框，提示文字的下方，还有一个输入框，要求用户输入信息，并有“确定”和“取消”两个按钮。它往往用来获取用户输入的数据  
+```
+//用户填入的值，会作为返回值存入变量result
+var result=prompt('您的年龄？',23)
+```
+- window.confirm()方法弹出的对话框，除了提示信息之外，只有“确定”和“取消”连个按钮，往往用来征询用户是否同意
+```
+//result值为布尔值
+var result=confirm('你快乐嘛?');
+```
+- window.open()用于新建另一个浏览器窗口  
+```
+window.open(url,windowName,[windowFeatures])
+//url:字符串，新窗口的网址；windowName:新窗口的名字；windowFeature:新窗口都参数  
+var popup = window.open(
+  'somepage.html',
+  'DefinitionsWindows',
+  'height=200,width=200,location=no,status=yes,resizable=yes,scrollbars=yes'
+);
+```
+- window.close()用于关闭当前窗口  
+- window.stop()等同于单击浏览器的停止按钮，会停止加载等待加载的对象  
+- window.moveTo()方法用于移动浏览器窗口到指定位置；window.moveBy()方法将窗口移动到一个相对位置  
+- window.resizeTo()方法用于缩放窗口到指定大小；window.resizeBy()用于缩放窗口  
+- window.scrollTo()/window.scroll()方法用于将文档滚动到指定位置;window.scrollBy()方法用于将网页滚动到指定距离  
+- window.print()会跳出打印对话框  
+- window.focus()方法会激活窗口，使其获得焦点；window.blur()方法将焦点从窗口移除  
+- window.getSelection()方法返回一个Selection对象，表示用户现在选中的文本  
+```
+var selObj=window.getSelection();
+var selectedText=selObj.toString();
+```
+- window.getComputedStyle()方法接受一个元素节点作为参数，返回一个包含该元素的最终样式信息的对象;window.matchMedia()方法用来检查 CSS 的mediaQuery语句  
+- window.requestAnimationFrame()则是推迟到浏览器下一次重流时执行，执行完才会进行下一次重绘  
+- window.requestIdleCallback()保证将回调函数推迟到系统资源空闲时执行  
+### 事件  
+#### load事件和onload属性  
+load事件发生在文档在浏览器窗口加载完毕时。window.onload属性可以指定这个事件的回调函数  
+#### error事件和onerror属性  
+浏览器脚本发生错误时，会触发window对象的error事件。我们可以通过window.onerror属性对该事件指定回调函数  
+#### window对象的事件监听属性  
+### 多窗口操作  
+#### 窗口的引用  
+- top:顶层窗口，即最上层的那个窗口  
+- parent:父窗口  
+- self:当前窗口，即自身  
+#### iframe元素  
+对于iframe嵌入的窗口，document.getElementById方法可以拿到该窗口的 DOM 节点，然后使用contentWindow属性获得iframe节点包含的window对象  
+#### window.frames属性  
+window.frames属性返回一个类似数组的对象，成员是所有子窗口的window对象  
