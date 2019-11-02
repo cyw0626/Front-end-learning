@@ -44,3 +44,121 @@ Cookie字段可以包含多个Cookie，使用分号分隔
 document.cookie用于读写当前网页的Cookie  
 document.cookie一次只能写入一个 Cookie，而且写入并不是覆盖，而是添加  
 删除一个现存 Cookie 的唯一方法，是设置它的expires属性为一个过去的日期   
+## XMLHttpRequest对象  
+AJAX：Asynchronous JavaScript and XML，指的是通过JavaScript的异步通信，从服务器获取XML文档从中提取数据，再更新当前网页的对应部分，而不用刷新整个网页  
+只要用脚本发起通信，就可以叫做AJAX通信。AJAX包括以下几个步骤：  
+1.创建XMLHttpRequest实例  
+2.发出HTTP请求  
+3.接收服务器传回的数据  
+4.更新网页数据  
+```
+var xhr=new XMLHttpRequest();
+xhr.onreadystatechange=function(){
+  //通信成功时，状态值为4
+  if(xhr.readyState===4){
+    if(xhr.status===200){
+      console.log(xhr.responseText);
+    }else{
+      console.error(xhr.statusText);
+    }
+  }
+};
+xhr.onerror=function(e){
+  console.erroe(xhr.statusText);
+};
+
+xhr.open('GET','/endpoint',true);
+xhr.send(null);
+```
+### XMLHttpRequest的实例属性  
+- XMLHttpRequest.readyState返回一个整数，表示实例对象的当前状态  
+①0，表示 XMLHttpRequest 实例已经生成，但是实例的open()方法还没有被调用  
+②1，表示open()方法已经调用，但是实例的send()方法还没有调用，仍然可以使用实例的setRequestHeader()方法，设定 HTTP 请求的头信息  
+③2，表示实例的send()方法已经调用，并且服务器返回的头信息和状态码已经收到  
+④3，表示正在接收服务器传来的数据体（body 部分）。这时，如果实例的responseType属性等于text或者空字符串，responseText属性就会包含已经收到的部分信息  
+⑤4，表示服务器返回的数据已经完全接收，或者本次接收已经失败  
+- XMLHttpRequest.onreadystatechange属性指向一个监听函数  
+- XMLHttpRequest.response属性表示服务器返回的数据体（即 HTTP 回应的 body 部分）  
+- XMLHttpRequest.responseType属性是一个字符串，表示服务器返回数据的类型。这个属性是可写的，可以在调用open()方法之后、调用send()方法之前，设置这个属性的值，告诉服务器返回指定类型的数据  
+- XMLHttpRequest.responseText属性返回从服务器接收到的字符串  
+- XMLHttpRequest.responseXML属性返回从服务器接收到的 HTML 或 XML 文档对象  
+- XMLHttpRequest.responseURL属性是字符串，表示发送数据的服务器的网址  
+- XMLHttpRequest.status属性返回一个整数，表示服务器回应的 HTTP 状态码  
+200：OK，访问正常  
+301：Moved Permanently,永久移动  
+302：Moved temporarily,暂时移动  
+304：Not Modified,未修改  
+307：Temporary Redirect,暂时重定向  
+401：Unauthorized,未授权  
+403：Forbidden,禁止访问  
+404：Not Found,未发现指定网址  
+500：Internal Server Error,服务器发生错误  
+- XMLHttpRequest.statusText属性返回一个字符串，表示服务器发送的状态提示  
+- XMLHttpRequest.timeout属性返回一个整数，表示多少毫秒后，如果请求仍然没有得到结果，就会自动终止。如果该属性等于0，就表示没有时间限制  
+- XMLHttpRequestEventTarget.ontimeout属性用于设置一个监听函数，如果发生 timeout 事件，就会执行这个监听函数  
+- 事件监听属性  
+- XMLHttpRequest.withCredentials属性是一个布尔值，表示跨域请求时，用户信息（比如 Cookie 和认证的 HTTP 头信息）是否会包含在请求之中  
+- XMLHttpRequest.upload属性可以得到一个对象，通过观察这个对象，可以得知上传的进展  
+```
+function upload(blobOrFile){
+  var xhr=new XMLHttpRequest();
+  xhr.open('POST','/server',true);
+  xhr.onload=function(e){};
+  var progressBar=document.quarySelector('progress');
+  xhr.upload.onprogress=function(e){
+    if(e.lengthComputable){
+      progreaaBar.value=(e.loaded/e.total)*100;
+      progressBar.textContent=progrssBar.value;
+    }
+  };
+xhr.send(blobOrFile);
+}
+upload(new Bolb(['hello world'],{type:'text/plain'}));
+```
+### XMLHttpRequest的实例方法  
+- XMLHttpRequest.open()方法用于指定 HTTP 请求的参数，或者说初始化 XMLHttpRequest 实例对象  
+```
+void open(
+   string method,//表示 HTTP 动词方法，比如GET、POST、PUT、DELETE、HEAD等
+   string url,
+   optional boolean async,
+   optional string user,
+   optional string password
+);
+```
+- XMLHttpRequest.send()方法用于实际发出 HTTP 请求  
+```
+function sendForm(form){
+ var formData=new FormData(form);
+ formData.append('crsf','1234567890');
+ var xhr=new XMLHttpRequest();
+ xhr.open('POST',form.action,true);
+ xhr.onload=function(){
+  //...
+ };
+ xhr.send(formData);
+ 
+ return false;
+}
+var form=document.querySelector('#registration');
+sendForm(form);
+```
+- XMLHttpRequest.setRequestHeader()方法用于设置浏览器发送的 HTTP 请求的头信息  
+- XMLHttpRequest.overrideMimeType()方法用来指定 MIME 类型，覆盖服务器返回的真正的 MIME 类型，从而让浏览器进行不一样的处理  
+- XMLHttpRequest.getResponseHeader()方法返回 HTTP 头信息指定字段的值  
+- XMLHttpRequest.getAllResponseHeaders()方法返回一个字符串，表示服务器发来的所有 HTTP 头信息  
+- XMLHttpRequest.abort()方法用来终止已经发出的 HTTP 请求  
+### XMLHttpRequest实例的事件  
+- readyState属性的值发生改变，就会触发 readyStateChange 事件  
+- 上传文件时，XMLHttpRequest 实例对象本身和实例的upload属性，都有一个progress事件，会不断返回上传的进度  
+- load 事件表示服务器传来的数据接收完毕，error 事件表示请求出错，abort 事件表示请求被中断（比如用户取消请求）  
+- abort、load和error这三个事件，会伴随一个loadend事件，表示请求结束，但不知道其是否成功  
+- 服务器超过指定时间还没有返回结果，就会触发 timeout 事件  
+### Navigator.sendBeacon()  
+用户卸载网页的时候，有时需要向服务器发一些数据。很自然的做法是在unload事件或beforeunload事件的监听函数里面，使用XMLHttpRequest对象发送数据。但是，这样做不是很可靠，因为XMLHttpRequest对象是异步发送，很可能在它即将发送的时候，页面已经卸载了，从而导致发送取消或者发送失败。  
+```
+window.addEventListener('unload',logData,false);
+function logData(){
+  navigator.sendBeacon('/log',analyticsData);   //navigator.sendBeacon(url, data)
+}
+```
