@@ -215,3 +215,23 @@ WebSocket 是一种通信协议，使用ws:// （非加密）和wss:// （加密
 - CORS  
 CORS 是跨源资源分享（Cross-Origin Resource Sharing）的缩写,允许任何类型的请求  
 ## CORS  
+CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能。  
+### 两种请求  
+区分：请求方法是——HEAD\GET\POST;HTTP的头信息字段：ACCEPT/ACCEPT-Language/Content-Language/Laxt-Event-ID/Content-type  
+#### 简单请求  
+对于简单请求，浏览器直接发出 CORS 请求。具体来说，就是在头信息之中，增加一个Origin字段  
+- Access-Control-Allow-Origin该字段是必须的。它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求  
+- Access-Control-Allow-Credentials该字段可选。它的值是一个布尔值，表示是否允许发送 Cookie  
+- 如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定  
+- 显式指定Access-Control-Allow-Credentials字段，告诉浏览器可以发送 Cookie  
+#### 非简单请求  
+- 预检请求  
+```
+var url = 'http://api.alice.com/cors';
+var xhr = new XMLHttpRequest();
+xhr.open('PUT', url, true);
+xhr.setRequestHeader('X-Custom-Header', 'value');
+xhr.send();
+```
+- 预检请求的回应  
+- 浏览器的正常请求和回应  
