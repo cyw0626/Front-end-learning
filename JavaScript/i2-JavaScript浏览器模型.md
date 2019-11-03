@@ -235,3 +235,26 @@ xhr.send();
 ```
 - 预检请求的回应  
 - 浏览器的正常请求和回应  
+## Storage接口  
+Storage接口用于脚本在浏览器保存数据。两个对象部署了这个接口：window.sessionStorage和window.localStorage。  
+sessionStorage保存的数据用于浏览器的一次对话/localStorage保存的数据长期存在  
+- Storage.length：返回保存的数据项的个数  
+- Storage.setItem()方法用于存入数据
+```
+//参数都是字符串
+window.sessionStorage.setItem('key','value');
+window.localStorage.setItem('key','value');
+window.localStorage.key='value';
+window.localStorage['key']='value';
+```
+- Storage.getItem()方法用于读取数据，参数为键名  
+- Storage.removeItem()方法用于清除某个键名对应的键值，参数为键名   
+- Storage.clear()方法用于清除所有保存的数据  
+- Storage.key()接受一个整数作为参数，返回该位置对应的键值   
+### Storage事件  
+Storage接口存储的数据发生变化时，会触发storage时间，可以指定这个事件的监听函数  
+```
+//监听函数接受一个event实例对象作为参数：StorageEvent.key/StorageEvent.newValue/StorageEvent.oldValue/StorageEvent.storageArea/StorageEvent.url   
+window.addEventListener('storage',onStorageChange);
+```
+> 该事件有一个很特别的地方，就是它不在导致数据变化的当前页面触发，而是在同一个域名的其他窗口触发
