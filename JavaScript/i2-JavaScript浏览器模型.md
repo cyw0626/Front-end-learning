@@ -162,3 +162,56 @@ function logData(){
   navigator.sendBeacon('/log',analyticsData);   //navigator.sendBeacon(url, data)
 }
 ```
+## 同源限制  
+所谓同源，即协议相同、域名相同、端口相同。同源政策的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。  
+### Cookie  
+- 两个网页一级域名相同、次级域名不同，浏览器允许通过设置document.domain共享cookie   
+- 通过Set-Cookie指定所属域名为一级域名，这样二级域名和三级域名不用做任何设置  
+### iframe和多窗口通信  
+- 片段识别符  
+片段识别符指的是，URL的#号后面的部分，只是改变片段标识符，页面不会重新刷新  
+```
+//父窗口写入子窗口  
+var src=originURL + '#' +data;
+//子窗口监听hashchange事件  
+window.hashchange=checkMessage;
+function checkMessage(){
+  var message=window.location.hash;
+}
+```
+```
+//子窗口改变父窗口的片段标识符  
+parent.location.href=target+'#'+hash;
+```
+- window.postMessage()
+跨文档通信API为window对象新增了一个window.postMessage方法,允许两个是否同源的窗口通信  
+```
+//父窗口向子窗口发送消息
+var sonWin=window.open('URL','title');
+sonWin.postMessage('data','URL');
+```
+```
+//子窗口向父窗口发送消息
+window.opener.postMessage('data','URL');
+```
+父窗口和子窗口都可以通过message事件，监听对方消息。message事件的参数是事件对象event:
+event.source:发送消息的窗口  
+event.origin:消息发向的网址  
+event.data:消息内容  
+- LocalStorage  
+通过window.postMessage读写其他窗口的LocalStorage.  
+### AJAX  
+AJAX除了假设服务器代理，有JSONP、WebSocke、CORS三种方式规避同源限制  
+- JSONP  
+①网页中添加一个<script>元素，向服务器请求一个脚本  
+```
+  //请求的脚本网址有一个callback参数（?callback=bar），用来告诉服务器，客户端的回调函数名称（bar）
+  <script src="https://api.foo.com?callback=bar"></script>
+```
+②服务器收到请求后，拼接一个字符串，将 JSON 数据放在函数名里面，作为字符串返回（bar({...})）  
+③户端会将服务器返回的字符串，作为代码解析
+- WebSocket  
+WebSocket 是一种通信协议，使用ws:// （非加密）和wss:// （加密）作为协议前缀。该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。  
+- CORS  
+CORS 是跨源资源分享（Cross-Origin Resource Sharing）的缩写,允许任何类型的请求  
+## CORS  
