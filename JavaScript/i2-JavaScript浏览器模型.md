@@ -258,3 +258,17 @@ Storage接口存储的数据发生变化时，会触发storage时间，可以指
 window.addEventListener('storage',onStorageChange);
 ```
 > 该事件有一个很特别的地方，就是它不在导致数据变化的当前页面触发，而是在同一个域名的其他窗口触发
+## History对象  
+window.history指向history对象，它表示当前窗口的浏览历史   
+- History.length：当前窗口访问的网址数量  
+- History.state:History堆栈最上层的状态值   
+- History.back():移动到上一个网址  
+- History.forward()：移动到下一个网址  
+- History.go():接受一个和赠书作为参数，以当前网址为基准，移动到参数指定的网址  
+- History.pushState()方法用于在历史中添加一条记录  
+```
+window.history.pushState(state,title,url)
+```
+- History.replaceState()方法用来修改History对象的当前记录  
+### popstate事件  
+每当同一个文档的浏览历史（即history对象）出现变化时，就会触发popstate事件。只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用History.back()、History.forward()、History.go()方法时才会触发。    
