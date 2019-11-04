@@ -123,6 +123,26 @@ function onchange(file){
   };
 }
 ```
+## File对象，FileList对象，FileReader对象  
+### File对象
+File对象代表一个文件，用来读写文件信息  
+最常用的使用场合是表单的文件上传空间(<input type="file">),用户选中文件以后，浏览器就会生成一个数组，里面是每一个用户选中的文件，它们都是File实例对象  
+#### 构造函数  
+```
+new File(array,name[,options])
+```
+#### 实例属性和实例方法  
+- File.lastModified:最后修改时间  
+- File.name:文件名或文件路径  
+- File.size:文件大小  
+- File.type:文件的MIME类型  
+### FileList对象  
+- length属性
+- item()方法用来指定返回指定位置的实例  
+### FileReader对象  
+FileReader对象用于读取File对象或Blob对象所包含的文件内容  
+## 表单、FormData对象  
+
 
 
 
