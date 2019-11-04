@@ -142,6 +142,76 @@ new File(array,name[,options])
 ### FileReader对象  
 FileReader对象用于读取File对象或Blob对象所包含的文件内容  
 ## 表单、FormData对象  
+表单用来收集用户提交的数据，发送到服务器  
+```
+//<button>元素默认submit
+//formElement.submit()
+<form action="/handleing-page" method="post">
+  <div>
+    <label for="name">用户名：</label>
+    <input type="text" id="name" name="user_name"/>
+  </div>
+  <div>
+    <lable for="passwd">密码：</label>
+    <input type="password" id="passwd" name="user_passwd"/>
+  </div>
+  <div>
+    <input type="submit" id="submit" name="submit_button" value="提交"/>
+  </div>
+</form>
+```
+### FormData对象  
+浏览器原生提供了FormData对象来通过脚本构造和编辑表单键值对，然后进行发送  
+```
+var formData=new FormData(form);
+```
+- FormData.get(key)/FormData.getAll(key)/FormData.set(key, value)/FormData.delete(key)/FormData.append(key, value)/FormData.has(key)/FormData.keys()/FormData.values()/FormData.entries()  
+### 表单的内置验证  
+#### 自动验证  
+```
+<!-- 必填 -->
+<input required>
+
+<!-- 必须符合正则表达式 -->
+<input pattern="banana|cherry">
+
+<!-- 字符串长度必须为6个字符 -->
+<input minlength="6" maxlength="6">
+
+<!-- 数值必须在1到10之间 -->
+<input type="number" min="1" max="10">
+
+<!-- 必须填入 Email 地址 -->
+<input type="email">
+
+<!-- 必须填入 URL -->
+<input type="URL">
+```
+如果一个控件通过验证，他就会匹配:valid的CSS伪类，浏览器会继续进行表单提交的流程。如果没有通过验证，该控件就会匹配：invalid的CSS伪类，浏览器会终止表单提交，并显示一个错误。  
+- checkValidity()用于手动触发校验  
+```
+function submitForm(action){
+  var form=document.getElementById('form');
+  form.action=action;
+  if(form.checkValidity()){
+    form.submit();
+  }
+}
+```
+- willValidate属性  
+控件元素的willValidate属性是一个布尔值，表示该控件是否会提交时进行校验   
+- validationMessage属性  
+控件元素的validationMessage属性返回一个字符串，表示控件不满足校验条件时，浏览器显示的提示文本  
+- 控件元素的setCustomValidity()方法用来定制校验失败时的报错信息  
+- validity属性  
+控件元素的属性validity属性返回一个ValidityState对象，包含当前校验状态的信息  
+- 表单元素的 HTML 属性novalidate，可以关闭浏览器的自动校验  
+### enctype属性  
+表单能够用四种编码，向服务器发送数据。编码格式由表单的enctype属性决定  
+### 文件上传  
+
+
+
 
 
 
