@@ -59,3 +59,71 @@ fetch('URL',{
 - URLSearchParams.get()方法用来读取查询字符串里面的指定键，URLSearchParams.getAll()方法返回一个数组，成员是指定键的所有键值  
 - URLSearchParams.sort()方法对查询字符串里面的键进行排序  
 - URLSearchParams.keys()，URLSearchParams.values()，URLSearchParams.entries()这三个方法都返回一个遍历器对象，供for...of循环遍历。它们的区别在于，keys方法返回的是键名的遍历器，values方法返回的是键值的遍历器，entries返回的是键值对的遍历器  
+## ArrayBuffer对象，Blob对象  
+### ArrayBuffer对象  
+ArrayBuffer对象表示一段二进制数据，用来模拟内存里面的数据。通过这个对象，JavaScript可以读写二进制数据。这个对象可以看作内存数据的表达。  
+浏览器原生提供ArrayBuffer()构造函数，用来生成实例。它接受一个整数作为参数，表示这段二进制数据占用多少字节。   
+```
+var buffer=new ArrayBuffer(num);
+```
+- ArrayBuffer.byteLength表示当前实例占用的内存长度  
+- slice()方法用来赋值一部分内存，它接受两个整数参数，分别表示复制开始位置和结束位置  
+### Blob对象  
+Blob对象表示一个二进制文件的数据内容，它通常用来读写文件，它的名字是Binary Large Object的缩写，它用来操作二进制文件  
+```
+//第一个参数是数组，成员是字符串或二进制对象，表示新生成的Blob实例对象的内容
+//第二个参数是配置对象 
+new Blob(array [,options])
+```
+#### 实例属性和实例方法  
+- Blob.size返回数据大小，Blob.type返回数据类型  
+- slice()用于拷贝原来的数据  
+#### 获取文件信息  
+> 文件选择器<input type="file">用来让用户选取文件  
+文件选择器返回一个FileList对象，该对象是一个类似数组的成员，每个成员都是一个File实例对象  
+```
+//HTML代码
+<input type="file" accpet="image/*" mutiple onchange="fileinfo(this.files)"/>  
+//JS脚本  
+function fileinfo(files){
+  for(var i=0;i<files.length;i++){
+    var f=files[i];
+    console.log(f.name,f.size,f.type,f.lastModifiedDate);
+  }
+}
+#### 下载文件  
+AJAX 请求时，如果指定responseType属性为blob，下载下来的就是一个 Blob 对象  
+#### 生成URL  
+#### 读取文件  
+取得Blob对象以后，可以通过FileReader对象，读取Blob对象的内容  
+- FileReader.readAsText()：返回文本，需要指定文本编码，默认为 UTF-8。  
+- FileReader.readAsArrayBuffer()：返回 ArrayBuffer 对象。  
+- FileReader.readAsDataURL()：返回 Data URL。  
+- FileReader.readAsBinaryString()：返回原始的二进制字符串。  
+```
+//HTML代码  
+<input type="file" onchange="typefile(this.file[0])"></input>
+//JS代码  
+function onchange(file){
+  var slice=file.slice(0,4);
+  var reader=new FileReader();
+  reader.readArrayBuffer(slice);
+  reader.onload=function(e){
+    var buffer=reader.result;
+    // 将这四个字节的内容，视作一个32位整数
+    var view=new DateView(buffer);
+    var magic=view.getUnit32(0,false);
+    switch(magic){
+      case 0x89504E47: file.verified_type = 'image/png'; break;
+      case 0x47494638: file.verified_type = 'image/gif'; break;
+      case 0x25504446: file.verified_type = 'application/pdf'; break;
+      case 0x504b0304: file.verified_type = 'application/zip'; break;    
+    }
+    console.log(file.name,file.verified_type);
+  };
+}
+```
+
+
+
+
