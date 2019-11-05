@@ -204,5 +204,169 @@ index.openCursor(range).onsuccess = function (e) {
   }
 }
 ```
-   
+## Web Worker  
+### 概述  
+Web Work的作用，就是为JavaScript创造多线程环境，允许主线程创建Worker线程，将一些任务分配给后者运行  
+- 同源限制  
+- DOM限制  
+- 全局对象限制  
+- 通信联系  
+- 脚本限制  
+- 文件限制
+### 基本用法  
+#### 主线程 
+```
+var worker=new Worker('work.js');
+work.postMessage({method:'echo',args:['work']});
+work.onmessage=function(event){
+  doSomething(event.data);
+}
+worker.terminate();
+```
+#### Worker线程  
+```
+self.addEventListener('message',function(e){
+  self.postMessage(e.data);
+},false);
+//self=this
+```
+#### Worker加载脚本
+```
+importScripts('scripts1.js','scripts2.js');
+```
+#### 错误处理  
+#### 关闭WorKer  
+```
+//主线程
+work.terminate();
+//worker线程  
+self.close();
+```
+### 数据通信  
+这种通信是拷贝关系，是传值而不是传址  
+```
+//主线程
+var uInt8Array=new Uint8Array(new ArrayBuffer(10));
+for(var i=0;i<uInt8Array.length;i++){
+  uInt8Array[i]=i*2;
+}
+work.postMessage(uInt8Array);
+
+//Worker线性  
+self.onmessage=funvtion(e){
+  var uInt8Array=e.data;
+  postMessabe('Inside worker.js: uInt8Array.toString() = ' + uInt8Array.toString());
+  postMessage('Inside worker.js: uInt8Array.byteLength = ' + uInt8Array.byteLength);
+}
+```
+### 同页面的Web Worker  
+```
+//html代码
+<!DOCTYPE html>
+  <body>
+    <script id="worker" type="app/worker">
+      addEventListener('message', function () {
+        postMessage('some message');
+      }, false);
+    </script>
+  </body>
+</html>
+//js代码
+var blob = new Blob([document.querySelector('#worker').textContent]);
+var url = window.URL.createObjectURL(blob);
+var worker = new Worker(url);
+
+worker.onmessage = function (e) {
+  // e.data === 'some message'
+};
+```
+### 实例：Worker线程完成轮询  
+浏览器需要轮询服务器状态，以便第一时间得知状态改变  
+```
+function createWorker(f){
+  var blob=new Blob(['{'+f.toString()+')']);
+  var url=window.URL.createObjectURL(blob);
+  var worker=new Worker(url);
+  return worker;
+}
+
+var pollingWorker=createWorker(function(e){
+  var cache;
+  function compare(new ,old){//...};
+  
+  setInterval(function(){
+    fetch('/my-api').then(
+    function(res){
+    var data=res.json();
+    if(!compare(data,cache)){
+      cache=data;
+      self.postMessage(data);
+    }
+    }),1000)
+  });
+  pollingWorker.onmessage=function(){
+  //render data
+  }
+  pollingWorker.postMessage('init');
+  ```
+### Worker新建Worker  
+```
+//主线程
+var worker = new Worker('worker.js');
+worker.onmessage = function (event) {
+  document.getElementById('result').textContent = event.data;
+};
+//worker.js
+// settings
+var num_workers = 10;
+var items_per_worker = 1000000;
+
+// start the workers
+var result = 0;
+var pending_workers = num_workers;
+for (var i = 0; i < num_workers; i += 1) {
+  var worker = new Worker('core.js');
+  worker.postMessage(i * items_per_worker);
+  worker.postMessage((i + 1) * items_per_worker);
+  worker.onmessage = storeResult;
+}
+
+// handle the results
+function storeResult(event) {
+  result += event.data;
+  pending_workers -= 1;
+  if (pending_workers <= 0)
+    postMessage(result); // finished!
+}
+//core.js
+var start;
+onmessage = getStart;
+function getStart(event) {
+  start = event.data;
+  onmessage = getEnd;
+}
+
+var end;
+function getEnd(event) {
+  end = event.data;
+  onmessage = null;
+  work();
+}
+
+function work() {
+  var result = 0;
+  for (var i = start; i < end; i += 1) {
+    // perform some complex calculation here
+    result += 1;
+  }
+  postMessage(result);
+  close();
+}
+```
+### API  
+
+
+
+
+
    
