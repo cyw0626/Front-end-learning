@@ -146,10 +146,63 @@ request.onsuccess=function(e){
 }
 ```
 ### indexedDB对象  
+- indexedDB.open()方法用于打开数据库。这是一个异步操作，但是会立刻返回一个 IDBOpenDBRequest 对象  
+- indexedDB.deleteDatabase()方法用于删除一个数据库，参数为数据库的名字。它会立刻返回一个IDBOpenDBRequest对象，然后对数据库执行异步删除  
+- indexedDB.cmp()方法比较两个值是否为 indexedDB 的相同的主键。它返回一个整数，表示比较的结果  
+### IDBRequest对象  
+### IDBDatabase对象  
+- name/version/objectStoreNames/onabort/onclose/onerror/onversionchange  
+- IDBDatabase.close()：关闭数据库连接，实际会等所有事务完成后再关闭。  
+- IDBDatabase.createObjectStore()：创建存放数据的对象仓库，类似于传统关系型数据库的表格，返回一个 IDBObjectStore 对象。该方法只能在versionchange事件监听函数中调用。  
+- IDBDatabase.deleteObjectStore()：删除指定的对象仓库。该方法只能在versionchange事件监听函数中调用。  
+- IDBDatabase.transaction()：返回一个 IDBTransaction 事务对象.  
+### IDBObjectStore对象  
+```
+db.transaction(['test'],'readonly')
+  .objectStore('test')
+  .get(num)
+  .onsuccess=function(e){}
+```
+- IDBObjectStore.add()用于向对象仓库添加数据  
+- IDBObjectStore.put()方法用于更新某个主键对应的数据记录，如果对应的键值不存在，则插入一条新的记录  
+- IDBObjectStore.clear()删除当前对象仓库的所有记录  
+- IDBObjectStore.delete()方法用于删除指定主键的记录
+- IDBObjectStore.count()方法用于计算记录的数量  
+- IDBObjectStore.getKey()用于获取主键  
+- IDBObjectStore.get()用于获取主键对应的数据记录  
+- IDBObjectStore.getAll()用于获取对象仓库的记录  
+- IDBObjectStore.getAllKeys()用于获取所有符合条件的主键  
+- IDBObjectStore.index()方法返回指定名称的索引对象 IDBIndex  
+- IDBObjectStore.createIndex()方法用于新建当前数据库的一个索引。该方法只能在VersionChange监听函数里面调用  
+- IDBObjectStore.deleteIndex()方法用于删除指定的索引。该方法只能在VersionChange监听函数里面调用  
+- IDBObjectStore.openCursor()用于获取一个指针对象  
+- IDBObjectStore.openKeyCursor()用于获取一个主键指针对象  
+### IDBTransaction对象  
+### IDBIndex对象  
+### IDBCursor对象  
+### IDBKeyRange对象  
+- IDBKeyRange.lowerBound()：指定下限  
+- IDBKeyRange.upperBound()：指定上限  
+- IDBKeyRange.bound()：同时指定上下限  
+- IDBKeyRange.only()：指定只包含一个值  
+```
+var t = db.transaction(['people'], 'readonly');
+var store = t.objectStore('people');
+var index = store.index('name');
 
-   
-   
-   
-   
+var range = IDBKeyRange.bound('B', 'D');
+
+index.openCursor(range).onsuccess = function (e) {
+  var cursor = e.target.result;
+  if (cursor) {
+    console.log(cursor.key + ':');
+
+    for (var field in cursor.value) {
+      console.log(cursor.value[field]);
+    }
+    cursor.continue();
+  }
+}
+```
    
    
