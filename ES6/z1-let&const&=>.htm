@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>let&const&=></title>
+    </head>
+    <body>
+        <h1>
+            let\const
+        </h1>
+        <button id="btn">btn</button>
+        <script>
+                //函数块级作用域
+                function getName(){
+                    var name="lemon";
+                    var status=0.5;
+                    console.log("name:",name);
+                    console.log("The " + name +"'s status is " +status);
+                }
+                getName();
+                let age=23;
+                console.log("age:", age);
+                //const
+                const school={
+                    university:"SDUST",
+                    PHD:"ECUST"
+                };
+                const demon=Object.freeze(school);
+                //let
+                for(var i=0;i<6;i++){
+                    //console.log(i);
+                    setTimeout(function(){
+                        console.log("var:"+i)},1000)
+                };
+                for(let i=0;i<6;i++){
+                    setTimeout(function(){
+                        console.log("let "+i)},1000)
+                };
+                //var存在变量提升
+                //箭头函数
+                const number=[1,3,5,7,9];
+                const double=number.map(function(number){
+                    return number*2;
+                });
+                const double2=number.map((number,i)=>{
+                    return i,number*3;
+                });
+                const double3=number.map((number)=>number*4); 
+                console.log(double3);
+                const greet=name=>{alert(`hello `+name)};
+                greet('memon');
+                //this
+                const person={
+                    name:"chris",
+                    hobby:['sleep','eat','play'],
+                    printHobby:function(){
+                        //var self=this;
+                        this.hobby.map((hobby)=>{
+                            console.log(this.name+" loves "+hobby);
+                        })
+                    }
+                }
+                person.printHobby();
+                //使用undefied实现箭头函数默认值
+                //箭头函数三不能用
+                //1.构造函数中
+                const Person=function(name,age){
+                    this.name=name,
+                    this.age=age
+                };
+                const jelly=new Person('jelly',23);
+                Person.prototype.upAge=function(){
+                    this.age++;
+                    console.log(this.age);
+                };
+                //button函数
+                const button=document.getElementById("btn");
+                button.addEventListener('click',function(){
+                    console.log("按下btn");
+                })
+                //需要arguments对象
+            </script>
+    </body>
+</html>
