@@ -74,5 +74,31 @@ class Obj2{
 - Class内部调用new.target,返回当前class   
 - 子类继承父类时，new.target会返回子类   
 - 在函数外部，使用new.target会报错  
+# Class的继承   
+Class可以通过extends关键字实现继承，子类必须在constructor方法中调用super方法，得到与父类同样的实例属性和方法   
+子类的构造函数中，只有调用了super之后，才可以使用this关键字   
+父类的静态方法，也会被子类继承   
+## Object.getPrototypeOf()  
+Object.getPrototypeOf方法可以用来从子类上获取父类  
+## super关键字  
+### super作为函数调用 
+- 代表父类的构造函数；  
+- super内部的this指的是子类的实例  
+### super作为对象  
+- super作为对象时，在普通方法中指向父类的原型对象；   
+> ES6规定，在子类普通方法中通过super调用父类方法时，方法内部的this指向当前的子类实例   
+- 在静态方法中，指向父类    
+在子类的静态方法中通过super调用父类的方法时，方法内部的this指向当前的子类，而不是子类的实例   
+由于对象总是继承于其他对象的，所以可以在任意一个对象中，使用super关键字  
+## 类的prototype属性和_proto_属性  
+- 子类的_proto_属性，表示构造函数的继承，总是指向父类  
+- 子类prototype属性的_proto_属性，表示方法的继承，总是指向父类的prototype属性   
+### 实例的_proto_属性  
+子类原型的原型是父类的原型  
+## 原生构造函数的继承   
+
+
+
+
 
 
