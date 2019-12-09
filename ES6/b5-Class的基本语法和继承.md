@@ -96,9 +96,14 @@ Object.getPrototypeOf方法可以用来从子类上获取父类
 ### 实例的_proto_属性  
 子类原型的原型是父类的原型  
 ## 原生构造函数的继承   
-
-
-
-
-
-
+ES6允许原生构造类定义子类，extends关键字不仅可以用来继承类，还可以继承原生构造函数  
+```
+class MyArray extends Array{
+  constructor(...args){
+    super(...args);
+  }
+}
+var arr=new MyArray();
+```
+## Mixin模式的实现  
+Mixin指的是多个对象合成一个新的对象，新对象具有各个组成成员的接口  
