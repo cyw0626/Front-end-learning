@@ -94,6 +94,30 @@ Node的.mjs支持URL路径，Node的import命令是异步加载
 ES6顶层的this指向undefined,CommonJS模块的顶层this指向当前模块   
 arguments\require\module\exports\_filename\_dirname顶层变量在ES6模块之中都是不存在的   
 ### ES6模块加载CommonJS模块   
-
-
-
+Node将CommonJS模块的输出定义module.exports等同于export default xxx   
+```
+import * as express from 'express';
+const app=express.default();
+```
+### CommonJS模块加载ES6模块   
+CommonJS加载ES6模块使用import()命令   
+```
+//es.mjs
+let foo={bar:'my-default'};
+export default foo;
+//cjs.js
+const es=await import('./es.mjs');
+cosnoel.log(es.default());
+```
+## 循环加载   
+“循环加载”指的是，a脚本的执行依赖b脚本，而b脚本的执行又依赖a脚本   
+### CommonJS模块的加载原理   
+CommonJS模块无论加载多少次，都只会在第一次加载时运行一次，以后再加载就返回第一次运行的结果   
+### CommonJS模块的循环加载    
+CommonJS模块遇到循环加载时，返回的是当前已经执行的部分点值，而不是代码全部执行后的值  
+### ES6模块的循环加载   
+ES6 模块是动态引用，如果使用import从一个模块加载变量（即import foo from 'foo'），那些变量不会被缓存，而是成为一个指向被加载模块的引用   
+## ES6模块的转码   
+- babel   
+- ES6 module transpiler   
+- SystemJS   
