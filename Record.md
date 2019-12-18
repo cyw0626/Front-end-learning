@@ -4,4 +4,4 @@
 🍌[CSS——Runoob](https://www.runoob.com/css/css-tutorial.html)  
 🍀[jQuery——Runoob](https://www.runoob.com/jquery/jquery-tutorial.html)  
 🏵[JavaScript——WangDoc](https://wangdoc.com/javascript/index.html)  
-🌮[ES6](http://es6.ruanyifeng.com/)
+🌮[ES6——ECMAScript6入门](http://es6.ruanyifeng.com/)
