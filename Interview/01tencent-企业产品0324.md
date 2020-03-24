@@ -2,7 +2,7 @@
 ## 1.em，rem，vh，vm单位    
 ### ①px、em、rem、%、vw、vh、vm  
 - px:px是像素pixel的缩写，代表图像中最小的点。  
-- em:em是随父元素front-size变化的单位，一般是1em=16px。  
+- em:em是随自身front-size变化的单位，一般是1em=16px。  
 - rem：rem随html的front-size变化的单位。  
 - %：Ⅰ；Ⅱposition:abosolute便是相对于父元素；Ⅲ
 - vw:vw是viewport width的缩写，是浏览器视图宽度的1%。  
