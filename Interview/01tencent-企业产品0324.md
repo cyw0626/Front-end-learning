@@ -46,14 +46,17 @@ div{
 ```
 div{
     width:200px;
-    height:200px;
+    height:100px;
     position:absolute;
-    top:50%;
+    top:50%;  
     left:50%;
-    margin-top:-100px;
+    margin-top:-50px;
     margin-left:-100px;
 }
 ```
+原理：  
+对当前元素的position设置为absolute并且相对于父元素定位,先设置left:50%;top:50%使当前元素的**左上角**处于父元素的中心位置,   
+之后再应用负margin特性使其中心位于父元素的中心.
 ### ③绝对定位【Transform变形】  
 ```
 div{
@@ -65,8 +68,73 @@ div{
     transform: translate(-50%,-50%);  /* 自己的50% */
 }
 ```
-### ④
+让left和top都是50%，这在水平方向上让div的最左与屏幕的最左相距50%，垂直方向上一样，所以再用transform向左（上）平移它自己宽度（高度）的50%，也就达到居中效果了。  
+### ④弹性盒模型【css不定宽高】  
+```
+body {
+    height:800px; /*去掉高度，只能垂直居中*/
+    display:flex;
+    align-items:center; /*align-items属性定义flex子项再flex容器当前行的纵轴方向上的对齐方式*/
+    justify-content: center;  /* justify-content用于设置或检索弹性盒子元素在横轴方向上的对齐方式*/
+
+}
+div{
+    width:200px;
+    height:200px;
+}
+```
+### ⑤父盒子设置为table-cell【vertical-align：middle;text-align:center】  
+```
+<div class="table-cell">
+  <p>Text</p>
+</div>
+.table-cell{
+  display:table-cell;
+  vertical-align:middle;  /*定义行内元素的基线相对于该元素所在行的基线的垂直对齐*/
+  text-align:center;
+  width:200px;
+  height:200px;
+  border:1px solid #666;
+}
+```
+### ⑥calc()函数动态计算   
+```
+<div class="calc">
+  <div class="child">Text</div>
+<div>
+.calc{
+  position:relative;
+  border:1px solid #ccc;
+  width:400px;
+  height:160px;
+}
+.calc.child{
+  position:absolute;
+  width:200px;
+  height:50px;
+  left:-webkit-calc((400px - 200px)/2);
+  top:-webkit-calc((160px - 50px)/2);
+  left:-moz-calc((400px - 200px)/2);
+  top:-moz-calc((160px - 50px)/2);
+  left:calc((400px-200px)/2);
+  top:calc(160px-50px)/2);
+}
+```
 ## 3.jquery中index是什么  
-## 4.let和var区别，变量提升     
-## 5.call和apply的使用，Array.prototype.slice.call(arguments)怎么转化的      
+index()返回指定元素相对于其他指定元素的index位置。  
+## 4.let和var，const区别，变量提升     
+### ①块级作用域   
+块级作用域/全局作用域/函数作用域
+定义：多个操作封装在大括号里的语句，没有返回值。  
+原因：Ⅰ内层变量可能覆盖外层变量Ⅱ计数循环变量泄露为全局变量  
+作用：外层作用域无法读取内层作用域变量，内层作用域可以定义外层作用域的同名变量，不需要立即执行匿名函数  
+### ②let/var/const  
+#### var除了在函数作用域中定义，在全局和会计作用域中定义全局都可以访问到   
+#### 暂时性死区：只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响  
+Ⅰlet声明的变量只在块级作用域中有效Ⅱlet不存在变量提升，绑定在暂时性死区（块级作用域内，let没声明，就不可以使用）Ⅲ不能重复声明  
+- var可以跨块访问，不能跨函数访问，可以重复定义  
+- let只能在块作用域访问，不可以重复定义，存在TDZ  
+- const定义常量，只能在块作用域访问，使用时必须初始化且不能修改  
+## 5.call和apply的使用，Array.prototype.slice.call(arguments)怎么转化的    
+
 ## 6.xff，xss安全攻击   
