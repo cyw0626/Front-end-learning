@@ -1,10 +1,8 @@
 # 腾讯企业产品实习(2020-3-24)  
 ## 1.em，rem，vh，vm单位    
 ### ①px、em、rem、%、vw、vh、vm  
-<table><tr><td bgcolor=red>xiaoneng</td></tr></table>  
-<font color=red size=3>哈哈哈</font>  
 - px:px是像素pixel的缩写，代表图像中最小的点，一张位图就是千千万万这样的点构成的。    
-- em:em是随自身font-size变化的单位，具有继承的特点。如果自身定义了font-size按自身来计算(浏览器默认字体16px),整个页面的1em不是固定值。  
+- em:em是随自身font-size变化的单位，具有继承的特点。如果自身定义了font-size按自身来计算(浏览器默认字体16px),**整个页面的1em不是固定值**。  
 - rem：rem随html的front-size变化的单位。  
 - %：Ⅰ；Ⅱposition:abosolute便是相对于父元素；Ⅲ
 - vw:vw是viewport width的缩写，是浏览器视图宽度的1%。  
