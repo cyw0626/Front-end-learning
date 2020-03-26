@@ -136,5 +136,94 @@ index()返回指定元素相对于其他指定元素的index位置。
 - let只能在块作用域访问，不可以重复定义，存在TDZ  
 - const定义常量，只能在块作用域访问，使用时必须初始化且不能修改  
 ## 5.call和apply的使用，Array.prototype.slice.call(arguments)怎么转化的    
+### 在ECMAScript中，每个函数都包含两个非继承而来的方法：apply()和call(),这两个方法的作用都是在特定的作用域内调用函数，主要作用和bind一样，用来改变函数体内的this的指向，或者说是在函数调用时改变上下文。  
+#### obj.call(thisObj,arg1,arg2,...)/obj.apply(thisObj,[arg1,arg2,...])  
+call和apply的作用是改变函数运行时上下文环境，改变this的指向，thisObj调用了obj里的方法。  
+bind同样改变了this指向的功能，但它不会立即执行，而是重新创建一个绑定函数，新函数调用时，使用bind()方法里第一个参数作为this.  
+- 绑定事件函数  
+- 循环回调
+```
+for(var i=0;i<3;i++){
+    (function(j){
+      setTimeout(function(){console.log(j);},100);
+    })(i)
+}
+/////////////////////////////////////////////////
+function fn(i){console.log(i)};
+for(var i=0;i<3;i++){
+  setTimeout(fn.call(null,i),100);
+}
+```
+- 实现继承  
+```
+ var Person = function(name,age) {
+   this.name = name;
+   this.age = age;
+ }
 
+ var P1 = function(name,age) {
+   // 借用构造函数的方式实现继承
+   // 利用call 继承了Person
+   Person.call(this,name,age)
+ }
+ P1.prototype.getName = function() {
+   console.log("name: "+this.name+", age: "+this.age);
+ }
+
+ var newPerson = new P1("popo",20);   // logs name: popo, age: 20
+ newPerson.getName();
+ ```
+ - 数组的验证方法  
+ - 类数组转换为数组  
+```
+// 实现一个简单的数组 'unshift'方法
+   Array.prototype.unshift = function(){
+    this.splice.apply(this,
+      [0,0].concat(Array.prototype.slice.apply(arguments)));  //在头上加入这些数组
+      return this.length;
+  }
+```
+> 首先，利用this.splice.apply(),其中splice，可以直接从数组中移除或者插入变量。apply()则以数组的形式传递参数，需要利用concat拼接数组。 
+**函数被调用时，在函数内部会得到类数组arguments，它拥有一个length属性，但是没有任何数组的方法。所以，将slice方法中的this指向arguments，获取到arguments的长度，从而确定方法的start和end下标，得到一个数组变量。**
+同样适用的还有，DOM里面的NodeList对象，它也是一种类数组对象。
+### 题目  
+```
+function foo(){
+	var id=3;
+return function(){
+	setTimeout(function(){
+	console.log(this.id);
+},100);
+}
+}
+var id=1;
+foo.call({id:2})();
+```
+> 因为setTimeout是匿名函数，this指向window,所以this.id为1.   
 ## 6.xff，xss安全攻击   
+### xss  
+[xss](https://blog.csdn.net/u014182411/article/details/80200631)
+Xss:css(cross site script),跨站点脚本攻击  
+攻击者向有xss漏洞的网站注入恶意的Html代码，当其他用户浏览网页时候执行代码控制用户浏览器进行一些破坏。
+危害：  
+- cookie挟持  
+- 破坏账户信息  
+- 获取用户账户信息  
+防御：  
+- 防御cookie挟持--HttpOnly:通过服务器设置cookie为HttpOnly，阻止js读写cookie信息； 
+- 输入检测--过滤特殊字符，按照白名单  
+- 输出检测--转义或编码特殊字符  
+### xff  
+XFF：X-Forwarded-For，简称XFF头，代表客户端，也就是HTTP的请求端的真实的IP，只有通过只有在通过了HTTP 代理或者负载均衡服务器时才会添加该项。  
+标准格式如下：X-Forwarded-For: client1, proxy1, proxy2。    
+伪造方式：通过浏览器插件或抓包改包工具或脚本修改header.  
+**大型网站用户的Http请求经过反向代理服务器转发，服务器收到的Remote Address就是反向代理服务器的地址，用户真实IP丢失。**  
+- 在进行与安全有关的操作时，只能通过Remote Address获取用户的IP地址，不能相信任何请求头。  
+- 当然，在使用nginx等反向代理服务器的时候，是必须使用X-Forward-For来获取用户IP地址的（此时Remote Address是nginx的地址），因为此时X-Forward-For中的地址是由nginx写入的，而nginx是可信任的。不过此时要注意，要禁止web对外提供服务。  
+### CSRF  
+CSRF又称XSRF(cross-site request forgery)跨站请求伪造，在客户端执行恶意代码，不注重窃取用户cookie。  
+CSRF保护的对象是那些可以直接产生数据改变的服务，对于读取随数据的服务，不需要进行CSRF的保护。  
+防御：  
+- 验证码：强制用户确定请求是自己发出的  
+- 验证Http Referer字段：refer是http请求头部的一个字段，包含了当前请求页面的来源页面的地址  
+- 添加Token并验证：表单放在隐藏的input中/cookie中，通过post的http body发送  
