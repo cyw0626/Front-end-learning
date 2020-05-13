@@ -13,6 +13,7 @@ function deepClone(obj){
     let objClone=Array.isArray(obj)?[]:{};  //  obj是否是数组
   }
   for(let key in obj){
+  //实例中属性
     if(obj.hasOwnProperty(key)){
     //判断obj子元素是否为对象
       if(obj[key]&&typeof obj[key]==="object"){
