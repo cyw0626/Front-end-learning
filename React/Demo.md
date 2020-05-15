@@ -56,15 +56,15 @@ DOM生成、替换的开销大
 1.state数据  
 2.JSX模板  
 //JSX->React.createElement('标签名'，'属性'，'内容')->虚拟DOM(JS对象)->真实DOM  
-3.数据+模板生成虚拟DOM(虚拟DOM就是一个JS对象，用它来描述真实的DOM)[损耗了性能] 
-<div id='abc'><span>hello world</span></div>
-{'div',{id:'abc'},['span',{},'hello world']}   
-4.虚拟DOM结构生成真实的DOM来显示   
-5.state发生变化  
-6.数据+模板生成新的虚拟DOM[极大提升了性能]  
-{'div',{id:'abc'},['span',{},'bye']}    
-7.比较原始虚拟DOM和新的虚拟DOM区别，找到区别[极大提升了性能]    
-8.直接操作DOM，改变区别中的内容    
+3.数据+模板生成虚拟DOM(虚拟DOM就是一个JS对象，用它来描述真实的DOM)[损耗了性能]   
+<div id='abc'><span>hello world</span></div>    
+{'div',{id:'abc'},['span',{},'hello world']}     
+4.虚拟DOM结构生成真实的DOM来显示     
+5.state发生变化    
+6.数据+模板生成新的虚拟DOM[极大提升了性能]    
+{'div',{id:'abc'},['span',{},'bye']}      
+7.比较原始虚拟DOM和新的虚拟DOM区别，找到区别[极大提升了性能]      
+8.直接操作DOM，改变区别中的内容      
 优点：  
 1.性能提升了  
 2.使得跨端应用得以实现。React Native  虚拟DOM->原生应用组件   
@@ -83,7 +83,8 @@ constructor()
 在组件即将被挂载到页面的时刻自动执行    
 - componentWillMount()  
 - render()  
-- componentDidMount()     
+- componentDidMount()  
+
 更新：  
 props:  
 //一个组件从父组件接收参数   
@@ -105,4 +106,5 @@ componentWillUnmount()
 -  setState内置异步，降低虚拟DOM比对频率  
 - 虚拟DOM，同层比对，key值  
 - shouldComponentUpdate()避免子组件的重复render()
-### axios请求  
+### axios请求    
+### CSSTransition,TransitionGroup在React绘制动画  
