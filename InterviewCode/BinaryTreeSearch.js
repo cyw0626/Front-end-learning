@@ -114,5 +114,5 @@ function bfs(node){
         node.left&&queue.push(node.left);
         node.right&&queue.push(node.right);
     }
-    return rssult;
+    return result;
 }
