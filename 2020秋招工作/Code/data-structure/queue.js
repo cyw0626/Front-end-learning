@@ -36,3 +36,24 @@ function passGame(nameList,num){
     }
     return queue.dequeue();
 }
+function PriorityQueue(){
+    this.items = [];
+    function QueueElement(element, priority){
+        this.element = element;
+        this.priority = priority;
+    }
+    PriorityQueue.prototype.enqueue = function(element,priority){
+        let queueElement = new QueueElement;
+        if(this.items.length === 0){
+            this.items.push(queueElement);
+        }else{
+            let added = false;
+            for(let i = 0 ; i<this.items.length; i++){
+                this.items.splice(i, 0, queueElement);
+                added = true;
+                break;
+            }
+
+        }
+    }
+}
