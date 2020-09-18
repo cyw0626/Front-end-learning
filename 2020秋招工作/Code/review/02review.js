@@ -80,3 +80,30 @@ function stopBubble(e){
 //减少DOM操作
 //减少HTTP请求
 //
+//6.节流防抖   
+//防抖：短时间内多次触发同一函数，只能执行最后一次，或者只在开始时执行   
+function debounce(fn,time){
+    let timer = null;
+    return function(){
+        let contexts = this;
+        let args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            fn.apply(contexts,args);
+        },time)
+    }
+}
+//节流：一段时间内只允许函数执行一次   
+function throttle(fn,time){
+    let timer = null;
+    return function(){
+        let contexts = this,
+            args = arguments;
+        if(!timer){
+            timer =setTimeout(function(){
+                fn.apply(contexts,args);
+                timer = null;
+            },time);
+        }
+    }
+}
