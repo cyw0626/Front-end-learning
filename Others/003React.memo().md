@@ -1,6 +1,6 @@
 # React组件优化  
 > 代码分割：Webpack、Browserify,加快首屏加载速度   
-### 组件懒加载(React.lazy()和<Suspense />)
+### 组件懒加载(React.lazy()和```<Suspense />```)
 ```
 import React, { Suspense } from 'react';
 
