@@ -18,3 +18,20 @@ Array.prototype.slice();
     深拷贝开辟一个新的堆内存存放新对象，修改不影响老的对象
 */}
 JSON.parse(JSON.stringify(obj1));
+
+function deepClone(target, map = new WeakMap()) {
+    if (typeof target === 'object') {
+        let cloneTarget = Array.isArray(target) ? [] : {};
+        if (map.get(target)) {
+            return map.get(target)
+        }
+        map.set(cloneTarget, target);
+        for (let key in target) {
+            cloneTarget = deepClone(target[key], map);
+        }
+
+        return cloneTarget;
+    }
+
+    return target;
+}
